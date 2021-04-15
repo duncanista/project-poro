@@ -12,10 +12,10 @@ Technique: Low-poly
 
 ## Functional requirements
 ### Game
-- User will be able to control a character
-- User will be able to interact with its environment 
-- User will be able to start, pause and end the game
-- The environment shall be affected by the user's actions
+- [ ] User will be able to control a character
+- [ ] User will be able to interact with its environment 
+- [ ] User will be able to start, pause and end the game
+- [ ] The environment shall be affected by the user's actions
 ### Setup
 - [ ] Probably React, still a TBD
 - [ ] ThreeJS (or React Three Fiber)
