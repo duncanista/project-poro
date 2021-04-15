@@ -26,3 +26,7 @@ Technique: Low-poly
 GitHub built-in Kanban board will be used to defined the tasks to be done. 
 Since we need to know what project we will move on with, we will just talk about the setup planning.
 [@duncanista](github.com/duncanista) will be the one which will prepare the setup, and [@luisalcataralo](github.com/luisalcantaralo) will supervise it (or shadow it).
+
+
+## Possible assets
+[Dungeon](https://mlobo.itch.io/low-poly-dungeon-asset-pack)
