@@ -25,6 +25,9 @@ Technique: Low-poly
 - [ ] Load 3D models properly
 - [ ] Achieve interaction with keyboard and mouse
 - [ ] Proper shaders and lights
+- [ ] Collectibles 
+- [ ] Enemies and bosses
+- [ ] Main character
 
 
 ## Methodology
