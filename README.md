@@ -5,10 +5,10 @@ Computer Graphics final project, still a TBD
 ## Proposals
 
 Main character: A frog
+
 Technique: Low-poly
+
 - Dungeon 
-- Sailing boat in ocean
-- Chess
 
 ## Functional requirements
 ### Game
