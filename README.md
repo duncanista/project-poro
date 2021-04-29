@@ -4,7 +4,7 @@ Computer Graphics final project, still a TBD
 
 ## Proposals
 
-Main character: A frog
+Main character: TBD
 
 Technique: Low-poly
 
