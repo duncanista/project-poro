@@ -15,6 +15,10 @@ Technique: Low-poly
 - [ ] User will be able to control a character
 - [ ] User will be able to interact with its environment 
 - [ ] User will be able to start, pause and end the game
+- [ ] User will be able to collect objects (collection)
+- [ ] User will be able to use a weapon
+- [ ] User will fight against at least two types of enemies
+- [ ] User will have HP, if HP = GAME OVER
 - [ ] The environment shall be affected by the user's actions
 ### Setup
 - [ ] Probably React, still a TBD
