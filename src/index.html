@@ -1,24 +1,39 @@
 <html>
+
 <head>
-<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-<title>Project Poro</title>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+  <title>Project Poro</title>
 
 
-<script type='module' src='dungeon.js'></script>
+  <script type='module' src='dungeon.js'></script>
 
-<style>
+  <style>
     body {
       width: 100vw;
       height: 100vh;
       margin: 0;
       border: 0;
-      overflow: hidden; 
+      overflow: hidden;
     }
-</style>
+  </style>
 
 </head>
+
 <body>
+  <div id="blocker">
+
+    <div id="instructions">
+      <span style="font-size:40px">Click to play</span>
+      <br />
+      (W, A, S, D = Move, SPACE = Jump, MOUSE = Look around)
+    </div>
+  </div>
+
+  <div id="container">
     <canvas id='webgl'></canvas>
+  </div>
+  
+  
 </body>
 
 </html>
