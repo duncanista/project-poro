@@ -4,7 +4,7 @@ Computer Graphics final project, still a TBD
 
 ## Proposals
 
-Main character: A frog
+Main character: TBD
 
 Technique: Low-poly
 
@@ -15,6 +15,10 @@ Technique: Low-poly
 - [ ] User will be able to control a character
 - [ ] User will be able to interact with its environment 
 - [ ] User will be able to start, pause and end the game
+- [ ] User will be able to collect objects (collection)
+- [ ] User will be able to use a weapon
+- [ ] User will fight against at least two types of enemies
+- [ ] User will have HP, if HP = 0, GAME OVER
 - [ ] The environment shall be affected by the user's actions
 ### Setup
 - [ ] Probably React, still a TBD
@@ -38,3 +42,4 @@ Since we need to know what project we will move on with, we will just talk about
 
 ## Possible assets
 [Dungeon](https://mlobo.itch.io/low-poly-dungeon-asset-pack)
+[Skeleton](https://assetstore.unity.com/packages/3d/characters/creatures/low-pol-skeleton-188865)
