@@ -42,3 +42,4 @@ Since we need to know what project we will move on with, we will just talk about
 
 ## Possible assets
 [Dungeon](https://mlobo.itch.io/low-poly-dungeon-asset-pack)
+[Skeleton](https://assetstore.unity.com/packages/3d/characters/creatures/low-pol-skeleton-188865)
