@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { Sky } from '@react-three/drei';
 import { Vector3 } from 'three';
-import { Physics } from '@react-three/cannon';
+import { Physics, useSphere } from '@react-three/cannon';
 
 import { Ground } from './components/ground';
 import Map from './components/Map.js';
@@ -12,9 +12,9 @@ import { Camera } from './components/camera';
 import gltf_map from './components/map.glb'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-const Map2 = () => {
+const Map2 = (props) => {
   const gltf = useLoader(GLTFLoader, gltf_map);
-  return <primitive object={gltf.scene} position={[0, 0.1, 0]} scale={3}/>
+  return <primitive object={gltf.scene} {...props}/>
 }
 
 const App = () => {
@@ -22,18 +22,25 @@ const App = () => {
     <div className='wrapper'>
       <Canvas shadowMap sRGB gl={{alpha: false}}>
         <Camera fov={90}/>
-        <Sky sunPosition={new Vector3(100, 10, 100)}/>
-        <ambientLight intensity={0.3}/>
+        
+        <ambientLight intensity={0.1}/>
+        
         <pointLight castShadow intensity={0.8} position={[100, 100, 100]}/>
-        <Physics>
+        <Physics 
+          iterations={20}
+          tolerance={0.0001}
+          gravity={[0, -30, 0]}
+        >
           <Ground/>
           
           <Player/>
-        </Physics>
-        <Suspense fallback={null}>
-          { /* <Map position={[0, 0.1, 0]} scale={3}/> */ }
-          <Map2 />
+          <Suspense fallback={null}>
+          <Map position={[-50, 0.1, 0]} scale={3}/> 
+          <Map2 position={[0, 0.1, 0]} scale={3}/>
         </Suspense>
+        </Physics>
+        
+        
       </Canvas>
     </div>
   );
