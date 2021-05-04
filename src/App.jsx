@@ -20,7 +20,7 @@ const Map2 = (props) => {
 const App = () => {
   return (
     <div className='wrapper'>
-      <Canvas shadowMap sRGB gl={{alpha: false}}>
+      <Canvas shadowMap sRGB gl={{alpha: false, antialias: false}}>
         <Camera fov={90}/>
         
         <ambientLight intensity={0.1}/>
