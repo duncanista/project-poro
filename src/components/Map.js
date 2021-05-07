@@ -8,6 +8,7 @@ import { useGLTF, useAnimations } from '@react-three/drei'
 export default function Model(props) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('/map.glb')
+  console.log('nodes ', nodes)
   const bounds = useMemo(() => {
     const objects = Object.entries(nodes).map(([key, node]) => {
       if (!node || !node.geometry) {
@@ -19,7 +20,7 @@ export default function Model(props) {
     return objects
   }, [nodes])
 
-  console.log(bounds);
+
 
   const { actions } = useAnimations(animations, group)
   return (

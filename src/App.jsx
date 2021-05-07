@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
 import { Canvas, useLoader } from '@react-three/fiber';
-import { Sky } from '@react-three/drei';
+import { useFBX } from '@react-three/drei';
 import { Vector3 } from 'three';
-import { Physics, useSphere } from '@react-three/cannon';
+import { Physics, useBox, useConvexPolyhedron } from '@react-three/cannon';
 
 import { Ground } from './components/ground';
 import Map from './components/Map.js';
@@ -10,11 +10,27 @@ import { Player } from './components/player';
 import { Camera } from './components/camera';
 
 import gltf_map from './components/map.glb'
+import armor from './assets/ArmorStand.glb';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 
 const Map2 = (props) => {
   const gltf = useLoader(GLTFLoader, gltf_map);
-  return <primitive object={gltf.scene} {...props}/>
+  console.log('gltf, ', gltf);
+  const nodes = gltf.nodes;
+
+  return <>
+    <primitive object={gltf.scene} {...props}/>
+  </>
+}
+
+const ArmorStand = (props) => {
+  let fbx = useFBX('/Armor_Stand.fbx')
+  let node = fbx.children[0];
+  let material = fbx.material;
+
+  
+  return <primitive object={fbx} {...props}/>
 }
 
 const App = () => {
@@ -32,6 +48,7 @@ const App = () => {
           gravity={[0, -30, 0]}
         >
           <Ground/>
+          <ArmorStand position={[-2, 0, 0]} scale={3}/>
           
           <Player/>
           <Suspense fallback={null}>
