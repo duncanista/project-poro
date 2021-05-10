@@ -6,7 +6,7 @@ import { useSphere } from '@react-three/cannon';
 import { PointerLockControls } from './pointer_lock_controls';
 import { usePlayerControls } from '../hooks/usePlayerControls';
 
-const SPEED = 5;
+const SPEED = 2.5;
 
 export const Player = (props) => {
   const { camera } = useThree();
