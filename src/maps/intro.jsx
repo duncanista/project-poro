@@ -1,15 +1,15 @@
-import React, { Suspense, useMemo } from 'react';
-import { useLoader } from '@react-three/fiber';
+import React, { Suspense } from 'react';
 import { useGLTF } from '@react-three/drei';
-import { useConvexPolyhedron } from '@react-three/cannon'
-import { Geometry } from 'three-stdlib/deprecated/Geometry'
+
+import { Prop } from '../components/prop'
 
 import allObjects from '../assets/Objects.glb';
 
 export const IntroductionMap = (props) => {
   const gltf = useGLTF(allObjects);
   const nodes = gltf.nodes;
-  console.log(gltf, nodes);
+
+  console.log(gltf)
 
   const Ground = () => {
     const LargeTile = (props) => {
@@ -17,49 +17,38 @@ export const IntroductionMap = (props) => {
     }
 
     return <group>
-      <Prop props={props} nodes={nodes} name='Ground_Large' position={[0,0,0]} />
-      <Prop props={props} nodes={nodes} name='Ground_Large' position={[1,0,0]}/>
+      <Prop props={props} nodes={nodes} name='Ground_Large' position={[0,0,0]} physics />
+      <Prop props={props} nodes={nodes} name='Ground_Large' position={[1,0,0]} physics/>
     </group>
   }
 
   return <Suspense dispose={null}>
     <group {...props}>
       <primitive object={gltf.scene} position={[-10, 0, 0]}/>
-      <Prop props={{
-        position: [3, 0, 0],
-        mass: 2
-      }} nodes={nodes} name='Armor_Stand' physics />
-      <Ground/>
+      {gltf.scene.children[1].children.map((element) => {
+        console.log(element)
+        if (element.geometry && element.geometry.index && false) {
+          return (<>
+            <Prop
+              props={{
+                position: element.position,
+                castShadow: element.castShadow,
+                frustumCulled: element.frustumCulled,
+                layers: element.layers,
+                matrix: element.matrix,
+                matrixAutoUpdate: element.matrixAutoUpdate
+              }}
+              nodes={nodes}
+              geometry={element.geometry}
+              name={element.name} physics
+            />
+          </>)
+        } else {
+          return <primitive object={element} />
+        }
+      })}   
       
     </group>
   </Suspense>
 }
 
-const toConvexProps = (bufferGeometry) => {
-  const geo = new Geometry().fromBufferGeometry(bufferGeometry)
-
-  geo.mergeVertices()
-  return [geo.vertices.map((v) => [v.x, v.y, v.z]), [], []]
-}
-
-
-const Prop = ({props, nodes, name, physics}) => {
-  const node = nodes[name];
-  const material = node.material;
-  const geo = useMemo(() => toConvexProps(node.geometry), [])
-  const [ref] = useConvexPolyhedron(() => ({ ...props, args: geo, material}))
-  if (physics) {
-    return <mesh 
-      name={`${name}-${Math.random()}`}
-      ref={ref} 
-      castShadow 
-      receiveShadow 
-      geometry={node.geometry}
-      { ...props } 
-      dispose={null}
-      material={material}>
-    </mesh> 
-  } else {
-    return <primitive object={node} {...props} name={`${name}-${Math.random()}`} />
-  }
-}

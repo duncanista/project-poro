@@ -8,6 +8,7 @@ import { Camera } from './components/camera';
 import { Cube } from './components/cube';
 
 import { IntroductionMap } from './maps/intro';
+import { PocMap } from './maps/poc';
 
 const App = () => {
   
@@ -26,6 +27,7 @@ const App = () => {
           <Ground receiveShadow position={[0, -0.01, 0]}/>
           <Suspense fallback={null}>   
             <IntroductionMap/> 
+            <PocMap/>
             <Cube mass={1} position={[4, 0, -1.5]} color='#f1f1f1'/>
           </Suspense>
           
