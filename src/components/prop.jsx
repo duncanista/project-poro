@@ -31,3 +31,16 @@ export const Prop = ({props, nodes, name, physics, geometry}) => {
     return <primitive object={node} {...props} name={`${name}-${Math.random()}`} />
   }
 }
+
+export const Prop2 = ({node}) => {
+  console.log('creating ', node.name);
+  const geometry = node.geometry;
+  const geo = useMemo(() => toConvexProps(geometry), []);
+  const [ref] = useConvexPolyhedron(() => ({ ...node, args: geo}))
+  return <mesh 
+      ref={ref} 
+      geometry={geometry}
+      { ...node } 
+      dispose={null}>
+    </mesh> 
+}

@@ -4,50 +4,33 @@ import { useGLTF } from '@react-three/drei';
 import { Prop } from '../components/prop'
 
 import allObjects from '../assets/Objects.glb';
+import map from '../assets/IntroductionMapDup.glb';
 
 export const IntroductionMap = (props) => {
-  const gltf = useGLTF(allObjects);
-  const nodes = gltf.nodes;
+  const gltf = useGLTF(map);
+  const obj = useGLTF(allObjects);
+  const nodes = obj.nodes;
 
   console.log(gltf)
 
-  const Ground = () => {
-    const LargeTile = (props) => {
-      return <Prop props={props} nodes={nodes} name='Ground_Large' />
-    }
+  const Ground = (props) => {
+    const groundGroup = gltf.nodes.Ground_Large;
+    const tiles = groundGroup.children;
 
-    return <group>
-      <Prop props={props} nodes={nodes} name='Ground_Large' position={[0,0,0]} physics />
-      <Prop props={props} nodes={nodes} name='Ground_Large' position={[1,0,0]} physics/>
+    return <group {...props}>
+      <Prop 
+        nodes={tiles} 
+        props={{position: tiles[0].position, 
+        name: tiles[0].name, mass: 1}} 
+        name={0} 
+        geometry={tiles[0].geometry} physics />
     </group>
   }
 
   return <Suspense dispose={null}>
     <group {...props}>
-      <primitive object={gltf.scene} position={[-10, 0, 0]}/>
-      {gltf.scene.children[1].children.map((element) => {
-        console.log(element)
-        if (element.geometry && element.geometry.index && false) {
-          return (<>
-            <Prop
-              props={{
-                position: element.position,
-                castShadow: element.castShadow,
-                frustumCulled: element.frustumCulled,
-                layers: element.layers,
-                matrix: element.matrix,
-                matrixAutoUpdate: element.matrixAutoUpdate
-              }}
-              nodes={nodes}
-              geometry={element.geometry}
-              name={element.name} physics
-            />
-          </>)
-        } else {
-          return <primitive object={element} />
-        }
-      })}   
-      
+      <primitive object={gltf.scene} position={[-10, 0, 0]} />
+      <Prop props={{position: [-5, 0, 0], mass: 1}} nodes={nodes} name={'Armor_Stand'} physics />
     </group>
   </Suspense>
 }
