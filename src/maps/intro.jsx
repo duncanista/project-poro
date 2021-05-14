@@ -12,6 +12,7 @@ export const IntroductionMap = (props) => {
   const nodes = obj.nodes;
 
   console.log(gltf)
+  console.log(nodes);
 
   const Ground = (props) => {
     const groundGroup = gltf.nodes.Ground_Large;
@@ -29,8 +30,17 @@ export const IntroductionMap = (props) => {
 
   return <Suspense dispose={null}>
     <group {...props}>
-      <primitive object={gltf.scene} position={[-10, 0, 0]} />
+      <primitive object={obj.scene} position={[-10, 0, 0]} />
+      <primitive object={gltf.scene} position={[-20, 0, 0]} />
       <Prop props={{position: [-5, 0, 0], mass: 1}} nodes={nodes} name={'Armor_Stand'} physics />
+      <Prop 
+        props={{position: [-2, 0.1, 0], mass: 100}} 
+        nodes={nodes} 
+        name={'Ground_Tiles_Large'} physics />
+       
+        
+
+    
     </group>
   </Suspense>
 }

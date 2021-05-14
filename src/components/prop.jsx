@@ -9,15 +9,14 @@ export const toConvexProps = (bufferGeometry) => {
   return [geo.vertices.map((v) => [v.x, v.y, v.z]), [], []]
 }
 
-
 export const Prop = ({props, nodes, name, physics, geometry}) => {
   const node = nodes[name];
   const material = node.material;
   const _geometry = geometry ? geometry : node.geometry;
   const geo = useMemo(() => toConvexProps(_geometry), [])
-  const [ref] = useConvexPolyhedron(() => ({ ...props, args: geo, material}))
-  if (physics) {
-    return <mesh 
+  const [ref] = useConvexPolyhedron(() => ({ ...props, args: geo }))
+  if (physics && _geometry.index) {
+    return <mesh
       name={`${name}-${Math.random()}`}
       ref={ref} 
       castShadow 

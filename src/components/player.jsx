@@ -1,14 +1,22 @@
 import React, { useEffect, useRef } from 'react';
 import { Vector3 } from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
+import { useGLTF } from '@react-three/drei';
 import { useSphere } from '@react-three/cannon'; 
 
 import { PointerLockControls } from './pointer_lock_controls';
 import { usePlayerControls } from '../hooks/usePlayerControls';
 
+import SWORD from '../assets/Sword.glb';
+
 const SPEED = 2.5;
 
 export const Player = (props) => {
+  const gltf = useGLTF(SWORD);
+  const sword = gltf.nodes.Sword;
+
+  const swordRef = useRef();
+  
   const { camera } = useThree();
 
   const {
@@ -32,8 +40,16 @@ export const Player = (props) => {
     api.velocity.subscribe(v => velocity.current = v)
   }, [api.velocity])
 
+
+
   useFrame(() => {
-    camera.position.copy(ref.current.position);
+    const currentPosition = ref.current.position;
+
+    const cameraPosition = new Vector3(currentPosition.x, currentPosition.y, currentPosition.z);
+    camera.position.copy(cameraPosition);
+    const time = Date.now() * 0.0005;
+
+    
     const direction = new Vector3();
 
     const frontVector = new Vector3(0, 0, Number(moveBackwards) - Number(moveForward));
@@ -53,8 +69,14 @@ export const Player = (props) => {
   });
 
   return (<>
-    <PointerLockControls />
-    <mesh ref={ref} />
+      <PointerLockControls />
+      <mesh ref={ref} castShadow>
+      <sphereBufferGeometry attach="geometry" args={[0.1, 5, 5]} />
+        <meshNormalMaterial attach='material' />
+      </mesh>
+       
+      
+      
     </>
   );
 }
