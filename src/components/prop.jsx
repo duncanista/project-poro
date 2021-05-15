@@ -25,6 +25,7 @@ export const Prop = ({props, nodes, name, physics, geometry}) => {
       { ...props } 
       dispose={null}
       material={material}>
+        <meshStandardMaterial wireframe/>
     </mesh> 
   } else {
     return <primitive object={node} {...props} name={`${name}-${Math.random()}`} />

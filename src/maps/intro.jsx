@@ -1,15 +1,26 @@
 import React, { Suspense } from 'react';
 import { useGLTF } from '@react-three/drei';
 
+import { useBox } from '@react-three/cannon';
+
 import { Prop } from '../components/prop'
 
 import allObjects from '../assets/Objects.glb';
 import map from '../assets/IntroductionMapDup.glb';
+import { MeshStandardNodeMaterial } from 'three-stdlib';
 
 export const IntroductionMap = (props) => {
   const gltf = useGLTF(map);
   const obj = useGLTF(allObjects);
   const nodes = obj.nodes;
+
+  const [ref] = useBox(() => ({
+    type: 'Static',
+    mass: 1,
+    args: [1, 0.1, 1],
+    rotation: [0, 0, 0],
+    position: [-2, 3, 0]
+  }));
 
   console.log(gltf)
   console.log(nodes);
@@ -34,10 +45,17 @@ export const IntroductionMap = (props) => {
       <primitive object={gltf.scene} position={[-20, 0, 0]} />
       <Prop props={{position: [-5, 0, 0], mass: 1}} nodes={nodes} name={'Armor_Stand'} physics />
       <Prop 
-        props={{position: [-2, 0.1, 0], mass: 100}} 
+        props={{position: [-2, 0, 0], mass: 100, type: 'Static'}} 
         nodes={nodes} 
-        name={'Ground_Tiles_Large'} physics />
-       
+        name={'Stairs'} physics />
+      <Prop 
+        props={{position: [-3, 0.75, 0], mass: 100, type: 'Static'}} 
+        nodes={nodes} 
+        name={'Stairs'} physics />
+      <mesh ref={ref} receiveShadow>
+        <boxBufferGeometry attach='geometry'/>
+        <meshStandardMaterial wireframe attach='material'/>
+      </mesh>
         
 
     

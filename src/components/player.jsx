@@ -43,12 +43,9 @@ export const Player = (props) => {
 
 
   useFrame(() => {
-    const currentPosition = ref.current.position;
 
-    const cameraPosition = new Vector3(currentPosition.x, currentPosition.y, currentPosition.z);
-    camera.position.copy(cameraPosition);
-    const time = Date.now() * 0.0005;
-
+    const position = new Vector3(ref.current.position.x, ref.current.position.y + 1, ref.current.position.z);
+    camera.position.copy(position);
     
     const direction = new Vector3();
 
@@ -72,7 +69,7 @@ export const Player = (props) => {
       <PointerLockControls />
       <mesh ref={ref} castShadow>
       <sphereBufferGeometry attach="geometry" args={[0.1, 5, 5]} />
-        <meshNormalMaterial attach='material' />
+        <meshStandardMaterial wireframe />
       </mesh>
        
       

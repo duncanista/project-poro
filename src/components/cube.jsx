@@ -1,11 +1,13 @@
 import React from 'react'
 import { useBox } from '@react-three/cannon';
+import { MeshNormalMaterial } from 'three';
 
 export const Cube = (props) => {
-  const [ref] = useBox(() => ({ ...props, }))
+  const [ref] = useBox(() => ({ ...props, type: 'Static' }))
   return (
-    <mesh ref={ref}>
+    <mesh ref={ref} >
       <boxBufferGeometry />
+      <meshNormalMaterial attach='material'/>
     </mesh>
   )
 }
