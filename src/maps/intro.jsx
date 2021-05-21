@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { useGLTF } from '@react-three/drei';
 
-import { useBox } from '@react-three/cannon';
+import { useBox, usePlane } from '@react-three/cannon';
 
 import { Prop } from '../components/prop'
 
@@ -14,16 +14,6 @@ export const IntroductionMap = (props) => {
   const obj = useGLTF(allObjects);
   const nodes = obj.nodes;
 
-  const [ref] = useBox(() => ({
-    type: 'Static',
-    mass: 1,
-    args: [1, 0.1, 1],
-    rotation: [0, 0, 0],
-    position: [-2, 3, 0]
-  }));
-
-  console.log(gltf)
-  console.log(nodes);
 
   const Ground = (props) => {
     const groundGroup = gltf.nodes.Ground_Large;
@@ -47,15 +37,16 @@ export const IntroductionMap = (props) => {
       <Prop 
         props={{position: [-2, 0, 0], mass: 100, type: 'Static'}} 
         nodes={nodes} 
-        name={'Stairs'} physics />
+        name={'Stairs'} />
       <Prop 
         props={{position: [-3, 0.75, 0], mass: 100, type: 'Static'}} 
         nodes={nodes} 
         name={'Stairs'} physics />
-      <mesh ref={ref} receiveShadow>
-        <boxBufferGeometry attach='geometry'/>
-        <meshStandardMaterial wireframe attach='material'/>
-      </mesh>
+      <Prop 
+        props={{position: [-2, 0.5, 0], rotation: [0, 0, -Math.PI/4], mass: 1, type: 'Static'}} 
+        nodes={nodes} 
+        name={'Ground_Tiles'} physics noMaterial />
+      
         
 
     

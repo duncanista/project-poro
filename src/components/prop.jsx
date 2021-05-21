@@ -9,7 +9,7 @@ export const toConvexProps = (bufferGeometry) => {
   return [geo.vertices.map((v) => [v.x, v.y, v.z]), [], []]
 }
 
-export const Prop = ({props, nodes, name, physics, geometry}) => {
+export const Prop = ({props, nodes, name, physics, geometry, noMaterial}) => {
   const node = nodes[name];
   const material = node.material;
   const _geometry = geometry ? geometry : node.geometry;
@@ -24,8 +24,8 @@ export const Prop = ({props, nodes, name, physics, geometry}) => {
       geometry={_geometry}
       { ...props } 
       dispose={null}
-      material={material}>
-        <meshStandardMaterial wireframe/>
+      material={!noMaterial && material}>
+        { !noMaterial && (<meshStandardMaterial wireframe/>)}
     </mesh> 
   } else {
     return <primitive object={node} {...props} name={`${name}-${Math.random()}`} />

@@ -17,15 +17,23 @@ export const PointerLockControls = (props) => {
 
   const [locked, setLocked] = useState(false);
 
+  const lockButton = document.getElementById('lockButton');
+
   useEffect(() => {
     if (controls && controls.current != null){
-      if (!locked) {
-        document.addEventListener('click', () => {
-          controls.current.lock();
-          console.log('locked');
-          setLocked(true);
-        });
-      }
+      controls.current.addEventListener('lock', () => {
+        setLocked(true);
+      });
+
+      controls.current.addEventListener('unlock', () => {
+        console.log('unlocked with esc');
+        setLocked(false);
+      });
+
+      lockButton.addEventListener('click', () => {
+        controls.current.lock();
+      })
+
     }
     sword.position.set(0.15, 0, -0.25);
     sword.rotation.set(Math.PI/2.5, Math.PI/2.1, Math.PI/2.1)
@@ -33,6 +41,15 @@ export const PointerLockControls = (props) => {
     camera.add(sword);
     scene.add(camera);
   }, []);
+
+  useEffect(() => {
+    document.addEventListener('click', () => {
+      if(locked) {
+        console.log('estoy pegando con la espada');
+      }
+    });
+    
+  }, [locked])
 
   useFrame(() => {
     const time = Date.now() * 0.0005

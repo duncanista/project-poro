@@ -14,8 +14,9 @@ const App = () => {
   
   return (
     <div className='wrapper'>
+      <button id='lockButton' style={{position: 'absolute', top: '5%', left: '5%', zIndex: 100}}>Lockear</button>
       <Canvas shadowMap sRGB gl={{alpha: false, antialias: false}}>
-        <Camera fov={90}/>
+        <Camera fov={120}/>
         
         <ambientLight intensity={0.1}/>
         
@@ -28,7 +29,7 @@ const App = () => {
           <Suspense fallback={null}>   
             <IntroductionMap/> 
             <PocMap/>
-            <Cube mass={1} position={[4, 0, -1.5]} color='#f1f1f1'/>
+            <Cube mass={1} position={[4, 0.5, -1.5]} color='#f1f1f1'/>
           </Suspense>
           
           <Player position={[0, 0, 0]}/>

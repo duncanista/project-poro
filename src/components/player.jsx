@@ -44,7 +44,7 @@ export const Player = (props) => {
 
   useFrame(() => {
 
-    const position = new Vector3(ref.current.position.x, ref.current.position.y + 1, ref.current.position.z);
+    const position = new Vector3(ref.current.position.x, ref.current.position.y, ref.current.position.z);
     camera.position.copy(position);
     
     const direction = new Vector3();
