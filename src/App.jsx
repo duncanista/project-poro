@@ -9,11 +9,12 @@ import { Cube } from './components/cube';
 
 import { IntroductionMap } from './maps/intro';
 import { PocMap } from './maps/poc';
-
+import {Menu} from './components/menu'
 const App = () => {
   
   return (
     <div className='wrapper'>
+      <Menu / >
       <button id='lockButton' style={{position: 'absolute', top: '5%', left: '5%', zIndex: 100}}>Lockear</button>
       <Canvas shadowMap sRGB gl={{alpha: false, antialias: false}}>
         <Camera fov={120}/>
