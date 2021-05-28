@@ -36,7 +36,7 @@ export const Prop2 = ({node}) => {
   console.log('creating ', node.name);
   const geometry = node.geometry;
   const geo = useMemo(() => toConvexProps(geometry), []);
-  const [ref] = useConvexPolyhedron(() => ({ ...node, args: geo}))
+  const [ref] = useConvexPolyhedron(() => ({ ...node, args: geo, type: 'Static', mass: 100}))
   return <mesh 
       ref={ref} 
       geometry={geometry}
