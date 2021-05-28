@@ -9,7 +9,7 @@ export function useGame(){
 }
 
 export const GameProvider = ({ children }) => { 
-  const [newGame, setNewGame] = useState(true);
+  const [newGame, setNewGame] = useState(false);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {

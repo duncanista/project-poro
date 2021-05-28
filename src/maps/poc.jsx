@@ -27,8 +27,6 @@ export const PocMap = (props) => {
         })
       }
       <primitive object={gltf.scene}/>
-      
-      
     </group>
   </Suspense>
 }
