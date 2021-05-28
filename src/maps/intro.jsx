@@ -1,13 +1,10 @@
 import React, { Suspense } from 'react';
 import { useGLTF } from '@react-three/drei';
 
-import { useBox, usePlane } from '@react-three/cannon';
-
 import { Prop } from '../components/prop'
 
 import allObjects from '../assets/Objects.glb';
 import map from '../assets/IntroductionMapDup.glb';
-import { MeshStandardNodeMaterial } from 'three-stdlib';
 
 export const IntroductionMap = (props) => {
   const gltf = useGLTF(map);

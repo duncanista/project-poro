@@ -1,11 +1,8 @@
-import React, { Suspense, useState, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import { useGLTF } from '@react-three/drei';
 
-import { Prop2 } from '../components/prop'
 
 import map from '../components/map.glb';
-
-var fs = require('fs');
 
 export const PocMap = (props) => {
   const gltf = useGLTF(map);
@@ -19,7 +16,7 @@ export const PocMap = (props) => {
         [].map(node => {
           const name = node[0]
           const element = node[1]
-          if (name == 'Ceiling') {
+          if (name === 'Ceiling') {
             return (<></>)
           } else {
             return (<primitive object={element} />)
