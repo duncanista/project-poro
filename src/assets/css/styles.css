@@ -1,22 +1,24 @@
+#myNav{
+  position: absolute !important;
+
+}
 .overlay {
     height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
+    width: 100%;
     top: 0;
     left: 0;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0, 0.9);
-    overflow-x: hidden;
-    transition: 0.5s;
+    transition: opacity 0.6s ease-in-out;
   }
-  
+.overlay.fade {
+  opacity: 0;
+  z-index: 0;
+}
   .overlay-content {
-    position: relative;
-    top: 25%;
-    width: 100%;
+    padding-top: 100px;
     text-align: center;
-    margin-top: 30px;
+    color: bisque;
   }
   
   .overlay a {
@@ -25,16 +27,47 @@
     font-size: 36px;
     color: #818181;
     display: block;
-    transition: 0.3s;
   }
   
   .overlay a:hover, .overlay a:focus {
     color: #f1f1f1;
   }
   
-  .overlay .closebtn {
+  .health-bar {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     position: absolute;
-    top: 20px;
-    right: 45px;
-    font-size: 60px;
+    top: 2%;
+    left: 50%;
+    margin-left: -200px;
+    z-index: 100;
+    width: 400px;
+    height: 20px;
+    padding: 5px;
+    opacity: 0.9;
+    background: #ddd;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    position: relative;
+  }
+  .bar {
+    background: #c54;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    
+    transition: width .5s linear;
+  }
+  
+  .hit {
+    background: rgba(255,255,255,0.6);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 0%;
+    
+    transition: width .5s linear;
   }
