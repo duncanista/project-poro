@@ -11,7 +11,7 @@ export const IntroductionMap = (props) => {
   const obj = useGLTF(allObjects);
   const nodes = obj.nodes;
 
-
+  console.log("All objects", obj);
   const Ground = (props) => {
     const groundGroup = gltf.nodes.Ground_Large;
     const tiles = groundGroup.children;
@@ -40,13 +40,17 @@ export const IntroductionMap = (props) => {
         nodes={nodes} 
         name={'Stairs'} physics />
       <Prop 
+        props={{position: [-3, 0.75, -3], mass: 100, type: 'Static'}} 
+        nodes={nodes} 
+        name={'Stairs'} physics />
+      <Prop 
         props={{position: [-2, 0.5, 0], rotation: [0, 0, -Math.PI/4], mass: 1, type: 'Static'}} 
         nodes={nodes} 
         name={'Ground_Tiles'} physics noMaterial />
-      
-        
-
-    
+      <Prop 
+        props={{position: [0, 0.5, 0], rotation: [0, 0, -Math.PI/4], mass: 1, type: 'Static'}} 
+        nodes={nodes} 
+        name={'Ground_Tiles'} physics noMaterial />
     </group>
   </Suspense>
 }

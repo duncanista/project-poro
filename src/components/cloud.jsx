@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import React from 'react'
 import { useBox } from '@react-three/cannon';
-import textureImg from './assets/smoke-1.png';
+import textureImg from '../assets/images/smoke-2.png';
 import { extend, useFrame, useThree } from '@react-three/fiber';
 import { useEffect } from 'react';
 
@@ -19,7 +19,7 @@ export const Cloud = (props) => {
 
     return(
         <mesh ref={ref}>
-            <planeBufferGeometry attach="geometry" args={[10, 5]} />
+            <planeBufferGeometry attach="geometry" args={[5, 5]} />
             <meshLambertMaterial map={texture} transparent opacity={0.8} />
         </mesh>
     );
