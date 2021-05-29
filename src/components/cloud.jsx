@@ -14,8 +14,6 @@ export const Cloud = (props) => {
     const dir = vel[randomN];
 
     useFrame(({ clock }) => {
-        
-        console.log(ref.current.rotation);
         ref.current.rotation.z += clock.getElapsedTime()*0.02 * dir;
     })
 

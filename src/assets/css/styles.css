@@ -1,18 +1,44 @@
-<<<<<<< HEAD
-=======
 #myNav{
   position: absolute !important;
 
+}
+.fade{
+  opacity: 1;
+}
+.fade:hover{
+  opacity: 1;
+}
+.cui {
+    height: 60vh;
+    width: 60vw;
+    top: 0%;
+    left: 5%;
+    border: 1px solid white;
+    transition: opacity 0.6s ease-in-out;
+    opacity: 0.8;
+}
+.credits {
+  height: 60vh;
+  width: 60vw;
+  top: 0%;
+  left: 5%;
+  border: 1px solid white;
+  transition: opacity 0.6s ease-in-out;
+  opacity: 0.8;
+}
+
+.controlsui-content {
+    text-align: center;
+    color: bisque;
 }
 .overlay {
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0, 0.9);
     transition: opacity 0.6s ease-in-out;
   }
+
 .overlay.fade {
   opacity: 0;
   z-index: 0;
@@ -34,7 +60,12 @@
   .overlay a:hover, .overlay a:focus {
     color: #f1f1f1;
   }
-  
+  .overlay{
+    color: #818181;
+  }
+  .overlay:hover, .overlay:focus {
+    color: #f1f1f1;
+  }
   .health-bar {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -73,4 +104,3 @@
     
     transition: width .5s linear;
   }
->>>>>>> c7449e86f670cd9c9bf3886d5c3a9bca3645b58e
