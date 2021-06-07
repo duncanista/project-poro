@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/cannon';
+import { Stars } from '@react-three/drei';
 
 import { Ground } from './ground';
 import { Player } from './player';
@@ -8,6 +9,7 @@ import { Camera } from './camera';
 import { Cube } from './cube';
 
 import { IntroductionMap } from '../maps/intro';
+
 import { PocMap } from '../maps/poc';
 import { Menu } from './menu'
 import { Skeleton } from './skeleton';
@@ -31,13 +33,13 @@ export const Game = () => {
         gravity={[0, -30, 0]}>
         <Ground receiveShadow position={[0, -0.01, 0]}/>
         <Suspense fallback={null}>   
-          <IntroductionMap/> 
-          <PocMap/>
+          { /* <IntroductionMap/> 
+          <PocMap/> */}
           <Cube mass={1} args={[1, 1, 1]} position={[4, 0.5, -1.5]} color='#f1f1f1'/>
         </Suspense>
         <Skeleton props={{position: [1, 0.25, 1], scale: 0.0005}} setHealth={setHealth} health={health}/>
 
-        <Player position={[0, 0, 0]}/>
+        <Player position={[0, 2, 0]}/>
         { /*
           <Suspense fallback={null}>
             <Map position={[-50, 0.1, 0]} scale={3}/> 

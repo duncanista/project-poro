@@ -3,14 +3,15 @@ import { usePlane } from '@react-three/cannon';
 
 export const Ground = (props) => {
   const [ref] = usePlane(() => ({
-    rotation: [-Math.PI / 2, 0, 0], ...props
+    rotation: [-Math.PI / 2, 0, 0], ...props,
+    type: 'Staic',
   }))
 
   return <>
-    <gridHelper args={[1000, 1000]}/>
+   <gridHelper args={[500, 500]}/>
     <mesh ref={ref} receiveShadow>
       <planeBufferGeometry attatch='geometry' args={[1000, 1000]}/>
-      <meshPhongMaterial attach='material' color='#999999'/>
+      <meshPhongMaterial attach='material' color=''/>
     </mesh>
   </>
 }

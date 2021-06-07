@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Vector3 } from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
-import { useSphere } from '@react-three/cannon'; 
+import { useSphere, useBox } from '@react-three/cannon'; 
 
 import { PointerLockControls } from './pointer_lock_controls';
 import { usePlayerControls } from '../hooks/usePlayerControls';
@@ -30,7 +30,7 @@ export const Player = (props) => {
   const [ref, api] = useSphere(() => ({
     mass: 1, 
     type: 'Dynamic',
-    args: 0.25,
+    args: 0.15,
     ...props
   }));
   
@@ -44,7 +44,7 @@ export const Player = (props) => {
 
   useFrame(() => {
 
-    const position = new Vector3(ref.current.position.x, ref.current.position.y, ref.current.position.z);
+    const position = new Vector3(ref.current.position.x, ref.current.position.y + 0.1, ref.current.position.z);
     camera.position.copy(position);
     
     const direction = new Vector3();
@@ -68,8 +68,7 @@ export const Player = (props) => {
   return (<>
       <PointerLockControls />
       <mesh ref={ref} castShadow>
-      <sphereBufferGeometry attach="geometry" args={[0.1, 5, 5]} />
-        <meshStandardMaterial wireframe />
+      <sphereBufferGeometry attach="geometry" args={[0.15, 5, 5]} />
       </mesh>
     </>
   );
