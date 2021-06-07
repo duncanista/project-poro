@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Physics, useBox, usePlane } from "@react-three/cannon";
+import { Physics } from "@react-three/cannon";
 import { Cloud } from "./cloud";
-import swordSrc from '../assets/images/sword-3.png';
-import keySrc from '../assets/images/keyboard-white.png';
-import mouseSrc from '../assets/images/mouse.png';
+import SWORDGLTF from '../assets/Sword.glb';
+import { useGLTF, Stars } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 
-import chestSrc from '../assets/images/chest-3.png';
+
+import aSrc from '../assets/images/a.png';
+import sSrc from '../assets/images/s.png';
+import dSrc from '../assets/images/d.png';
+import wSrc from '../assets/images/w.png';
 import potionSrc from '../assets/images/potion-2.png';
 import closeSrc from '../assets/images/close.png';
 
@@ -15,36 +19,52 @@ import '../assets/css/styles.css';
 
 import { useGame } from '../providers/game_provider';
 
+const Sword = (props) => {
+  const gltf = useGLTF(SWORDGLTF);
+  const a = useRef()
+  
+  useEffect(()=> {
+    console.log(gltf);
+    console.log(a);
+    gltf.scene.castShadow = true;
+  })
+  useFrame(({clock}) => {
+     a.current.position.y += Math.cos(clock.getElapsedTime()) * 0.0005;  
+  })
+  return <Suspense fallback={<Cloud />}>
+    <mesh castShadow ref={a} position={[-0.3,-2.68,6.6]} rotation={[0, 0, Math.PI/2]} >  
+      <group>
+        <primitive object={gltf.scene}    />
+      </group>
+    </mesh> 
+  </Suspense>
+}
+
 export const Start = () => {
   const { setNewGame } = useGame();
   const tutorial = useRef();
   const credits = useRef();
 
+
   const startNewGame = () => {
-    console.log("hello");
     setNewGame(true);
   }  
   const displayTutorial  = () => {
-    console.log("hello");
     tutorial.current.hidden = false;
     credits.current.hidden = true;
   }
-  const closeTutorial  = () => {
-    console.log("hello");
+  const close  = () => {
     tutorial.current.hidden = true;
+    credits.current.hidden = true;
+
   }
 
   const displayCredits  = () => {
-    console.log("hello");
     credits.current.hidden = false;
     tutorial.current.hidden = true;
 
   }
-  const closeCredits  = () => {
-    console.log("hello");
-    credits.current.hidden = true;
-  }
-
+ 
   useEffect(() => {
     tutorial.current.hidden = true;
     credits.current.hidden = true;
@@ -54,56 +74,52 @@ export const Start = () => {
     <h1 className="overlay" onClick={startNewGame} style={{position: 'absolute', top:'70%', left: '82%', zIndex: 100,  fontFamily:'dungeon'}} >Start Game</h1>
     <h1 className="overlay" onClick={displayCredits} style={{position: 'absolute', top:'77%', left: '82%', zIndex: 100,  fontFamily:'dungeon'}} >Credits</h1>
     <h1  className="overlay" onClick={displayTutorial}  style={{position: 'absolute', top:'84%', left: '82%', zIndex: 100,  fontFamily:'dungeon'}} >Tutorial</h1>
-    <h1  style={{position: 'absolute', top:'5%', left: '5%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'64px'}} >ProjecT PorO</h1>
+    <h1  style={{position: 'absolute', top:'5%', left: '5%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'128px'}} >ProjecT PorO</h1>
 
-    <div ref={tutorial} className="cui" style={{position: 'absolute', zIndex: 100, top:'15%'}} >
+    <div ref={tutorial} className="cui" style={{position: 'absolute', zIndex: 100, top:'5%'}} >
       <h1 style={{position: 'absolute', left: '2%', top:'3%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'64px', width:'40%'}} >How to play?</h1>
-      <img  onClick={closeTutorial} src={closeSrc} style={{position: 'absolute', top:'5%', left: '92%', zIndex: 100, width:'6%', opacity:'0.55'}} />
+      <img  onClick={close} src={closeSrc} style={{position: 'absolute', top:'5%', left: '92%', zIndex: 100, width:'4%', opacity:'0.55'}} />
 
-      <h4  style={{position: 'absolute', left: '3%', top: '20%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'32px'}} >Controls</h4>
-      <img src={keySrc} style={{position: 'absolute', top:'15%', left: '2%', zIndex: 100, width:'20%', opacity:'0.80'}} />
-      <img src={mouseSrc} style={{position: 'absolute', top:'26%', left: '23%', zIndex: 100, width:'8%', opacity:'0.80'}} />
-     
-      <h4  style={{position: 'absolute', left: '3%', top: '50%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'32px'}} >Weapons</h4>
-      <img src={swordSrc} style={{position: 'absolute', top:'60%', left: '2%', zIndex: 100, width:'6%', opacity:'0.55'}} />
-
-      <h4  style={{position: 'absolute', left: '50%', top: '20%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'32px'}} >Collectibles</h4>
-      <img src={chestSrc} style={{position: 'absolute', top:'28%', left: '49%', zIndex: 100, width:'8%',  opacity:'0.55'}} />
-      <img src={potionSrc} style={{position: 'absolute', top:'28%', left: '58%', zIndex: 100, width:'8%',  opacity:'0.55'}} />
-    
+      <h4  style={{position: 'absolute', left: '3%', top: '15%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'50px'}} >Controls</h4>
+      <img src={aSrc} style={{position: 'absolute', top:'35%', left: '3%', width:'6.2%', zIndex: 100  }} />
+      <img src={sSrc} style={{position: 'absolute', top:'35%', left: '10%',width:'5.7%', zIndex: 100, }} />
+      <img src={dSrc} style={{position: 'absolute', top:'35.2%', left: '17%',width:'6%', zIndex: 100, }} />
+      <img src={wSrc} style={{position: 'absolute', top:'23%', left: '10%',width:'6%', zIndex: 100}} />
+      <h4  style={{position: 'absolute', left: '3%', top: '45%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'32px'}} >Move</h4>
     </div>
 
-    <div ref={credits} className="credits" style={{position: 'absolute', zIndex: 100, top:'15%'}} >
+    <div ref={credits} className="credits" style={{position: 'absolute', zIndex: 100, top:'5%'}} >
       <h1 style={{position: 'absolute', left: '2%', top:'5%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'64px', width:'40%'}} >Made by</h1>
-      <img  onClick={closeCredits} src={closeSrc} style={{position: 'absolute', top:'5%', left: '92%', zIndex: 100, width:'6%', opacity:'0.55'}} />
-
+      <img  onClick={close} src={closeSrc} style={{position: 'absolute', top:'5%', left: '92%', zIndex: 100, width:'4%', opacity:'0.55'}} />
+     
       <h4  style={{position: 'absolute', left: '3%', top: '30%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'32px'}} >Jordan Gonzalez Bustamante</h4>
       <h4  style={{position: 'absolute', left: '3%', top: '55%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'32px'}} >Luis Alfonso Alcantara Lopez Ortega</h4>
       
     </div>
-    
-
-    <Canvas shadowMap sRGB gl={{alpha: false, antialias: false}}>
+    <Canvas shadowMap sRGB gl={{alpha: false, antialias: false}}>  
     <fog attach="fog" args={["white", 0, 20]} />
-
+    <Stars  />
+  
       <Physics position={[3, 0, 1]} gravity={[0, 0, 0]}>
 
         <Cloud position={[-0, -5, 0]} rotation={[0,0,0]} />
-
         <Cloud position={[-1, -5, 0]} rotation={[0,0,0]} />
         <Cloud position={[-4, -5, 0]} rotation={[0,0,0]} />
-
         <Cloud position={[-3.5, -5, -1]} rotation={[0,0,0]} />
         <Cloud position={[-5, -5, -1]} rotation={[0,0,0]} />
-
         <Cloud position={[-7.5, -5.5, -1]} rotation={[0,0,0]} />
-
-
-
-
+        <Cloud position={[0, -5, 0]} rotation={[0,0,0]} />
+        <Cloud position={[1.5, -5, -1]} rotation={[0,0,0]} />
+        <Cloud position={[3.5, -5, -1]} rotation={[0,0,0]} />
+        <Cloud position={[4, -5, -1]} rotation={[0,0,0]} />
+        <Cloud position={[7.5, -5.5, -1]} rotation={[0,0,0]} />
+ 
       </Physics>
-      <ambientLight intensity={0.5} />
-      <pointLight intensity={0.9} position={[-3, 0, 5]} />
+      <ambientLight intensity={0.1} />
+      <pointLight  intensity={0.7} position={[0, 2, 5]} />
+      <Suspense fallback={null}>
+        <Sword />
+      </Suspense> 
     </Canvas>
   </>);
 }

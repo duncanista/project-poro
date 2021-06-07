@@ -71,9 +71,6 @@ export const Player = (props) => {
       <sphereBufferGeometry attach="geometry" args={[0.1, 5, 5]} />
         <meshStandardMaterial wireframe />
       </mesh>
-       
-      
-      
     </>
   );
 }

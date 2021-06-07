@@ -1,17 +1,21 @@
 import React, { Suspense } from 'react';
 import { useGLTF } from '@react-three/drei';
-
+import {  useBox } from '@react-three/cannon'
 
 import map from '../components/map.glb';
 
 export const PocMap = (props) => {
   const gltf = useGLTF(map);
   console.log('poc map', gltf);
+  const [ref] = useBox(() => ({
+    mass: 0.1,
+    ...props,
+  }))
   //const elements = scene.children[0].children;
   //console.log(elements);
 
   return  <Suspense dispose={null}>
-    <group position={[10, 0, -10]} {...props}>
+    <group  position={[0, 0, 0]} {...props}>
       { 
         [].map(node => {
           const name = node[0]

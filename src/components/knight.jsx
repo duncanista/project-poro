@@ -1,28 +1,30 @@
-import React, { Suspense, useRef, useEffect } from 'react';
-import { useFrame } from '@react-three/fiber';
-import { useFBX, useAnimations, useTexture } from '@react-three/drei';
+import React, { useRef, useState, useMemo } from "react";
+import { Canvas, useFrame } from "react-three-fiber";
+import * as THREE from "three";
+import texture from "../assets/textures/Texture.png";
 
-import skelly from '../assets/characters/Armor_Stand.fbx';
 
-const IDLE = 'metarig|0_Idle';
-const WALK = 'metarig|1_Walk';
-const ATTACK = 'metarig|2_Attack';
-const GET_HIT = 'metarig|3_GetHit';
+const ArmorStand = (props) => {
+  const mesh = useRef();
+  const [active, setActive] = useState(false);
 
-export const ArmorStand = (props) => {
-  const fbx = useFBX(skelly);
-  console.log("fbx",fbx);
-  const armorStandMesh = fbx.children[0];
-  const group = useRef();
+  useFrame(() => {
+    mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
+  });
+
+  const texture = useMemo(() => new THREE.TextureLoader().load(texture), []);
   
-
-  return  <Suspense dispose={null}>
-    <mesh ref={group} {...props} dispose={null}>
-      <group>
-        <primitive object={fbx}/>
-        <skinnedMesh 
-          {...armorStandMesh}/>
-      </group>
+  return (
+    <mesh
+    {...props}
+    ref={mesh}
+    scale={active ? [2, 2, 2] : [1.5, 1.5, 1.5]}
+    onClick={(e) => setActive(!active)}
+      >
+      <boxBufferGeometry args={[1, 1, 1]} />
+      <meshBasicMaterial attach="material" transparent side={THREE.DoubleSide}>
+        <primitive attach="map" object={texture} />
+      </meshBasicMaterial>
     </mesh>
-  </Suspense>
+  );
 }

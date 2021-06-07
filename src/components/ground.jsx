@@ -7,10 +7,10 @@ export const Ground = (props) => {
   }))
 
   return <>
-    <gridHelper args={[1000, 1000]}/>
+   <gridHelper args={[500, 500]}/>
     <mesh ref={ref} receiveShadow>
       <planeBufferGeometry attatch='geometry' args={[1000, 1000]}/>
-      <meshPhongMaterial attach='material' color='#999999'/>
+      <meshPhongMaterial attach='material' color=''/>
     </mesh>
   </>
 }
