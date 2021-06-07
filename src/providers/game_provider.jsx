@@ -9,15 +9,16 @@ export function useGame(){
 }
 
 export const GameProvider = ({ children }) => { 
-  const [newGame, setNewGame] = useState(false);
+  const [newGame, setNewGame] = useState(true);
   const [ready, setReady] = useState(false);
+  const [health, setHealth] = useState(100);
 
   useEffect(() => {
     setReady(true);
   }, [])
 
   return (
-    <GameContext.Provider value={{ newGame, setNewGame }}>
+    <GameContext.Provider value={{ newGame, setNewGame, health, setHealth }}>
         { ready ? children : ( <Loading/> )}
     </GameContext.Provider>
   )

@@ -4,11 +4,15 @@ import swordSrc from '../assets/images/sword.png';
 import chestSrc from '../assets/images/chest.png';
 import potionSrc from '../assets/images/potion.png';
 
+import { useGame } from '../providers/game_provider';
+
 export const Menu = () => {
   const pause = useRef();
   const resume = useRef();
   const pauseScreen = useRef();
 
+  const { health } = useGame();
+  
   useEffect(() => {
     if (pause && pause.current){
       pause.current.addEventListener('click', () => {
@@ -31,7 +35,7 @@ export const Menu = () => {
             <a id='quitButton' href='#' style={{fontFamily:'dungeon'}} >Quit</a>
         </div>
     </div>
-    <div className="health-bar" data-total="1000" data-value="1000" style={{position: 'absolute', top:'2%', zIndex: 100}}>
+    <div className="health-bar" data-total="100" data-value={health} style={{position: 'absolute', top:'2%', zIndex: 100}}>
         <div className="bar">
             <div className="hit"></div>
         </div>
