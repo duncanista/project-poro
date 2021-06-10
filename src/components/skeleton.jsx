@@ -80,6 +80,9 @@ export const Skeleton = (props) => {
     <Suspense dispose={null}>
       <mesh ref={ref} position={position} dispose={null} onClick={(e) => {
         // TODO apply velocity to negative direction
+        let x = -camera.position.x + ref.current.position.x;
+        let z = -camera.position.z + ref.current.position.z;
+        api.velocity.set(x*10, 0, z*10)
       }}>
         <group ref={group} scale={props.scale} dispose={null} >
           <primitive object={fbx}/>
@@ -88,7 +91,7 @@ export const Skeleton = (props) => {
         </group>
         <mesh>
           <boxBufferGeometry args={[0.18, 0.36, 0.18]} transparent opacity={0} />
-          <meshNormalMaterial attach='material'  opacity={1}/>
+          <meshNormalMaterial attach='material' transparent opacity={0}/>
 
         </mesh>
       </mesh>
