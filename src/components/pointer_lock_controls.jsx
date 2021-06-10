@@ -29,7 +29,7 @@ export const PointerLockControls = (props) => {
           controls: controls.current
         }
       }))
-      console.log('los controles se cargaron');
+      // console.log('los controles se cargaron');
     }
   }, [controls]);
 
@@ -56,10 +56,10 @@ export const PointerLockControls = (props) => {
   useEffect(() => {
     document.addEventListener('click', () => {
       if(locked) {
-        console.log('estoy pegando con la espada');
-          setHitting(true);
-          timeAux = Date.now();
-          sword.rotation.set(0, Math.PI/2.1, (Math.PI/2.1)+0.5);
+        //console.log('estoy pegando con la espada');
+        setHitting(true);
+        timeAux = Date.now();
+        sword.rotation.set(0, Math.PI/2.1, (Math.PI/2.1)+0.5);
       }
     });
     

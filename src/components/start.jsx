@@ -25,8 +25,6 @@ const Sword = (props) => {
   const a = useRef()
   
   useEffect(()=> {
-    console.log(gltf);
-    console.log(a);
     gltf.scene.castShadow = true;
   })
   useFrame(({clock}) => {

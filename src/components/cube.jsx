@@ -3,10 +3,11 @@ import { useBox } from '@react-three/cannon';
 
 export const Cube = (props) => {
   const [ref] = useBox(() => ({ ...props, type: 'Static' }))
+  const { args } = props;
   return (
     <mesh ref={ref} receiveShadow castShadow >
-      <boxBufferGeometry />
-      <meshNormalMaterial attach='material'/>
+      <boxBufferGeometry args={args} />
+      <meshNormalMaterial attach='material' />
     </mesh>
   )
 }

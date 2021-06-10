@@ -16,6 +16,7 @@ import { Menu } from './menu'
 import { Skeleton } from './skeleton';
 
 import { useUserStore } from '../store';
+import Map from './Map'
 
 export const Game = () => {
   return <>
@@ -24,23 +25,22 @@ export const Game = () => {
       <Camera fov={120}/>
       
       <ambientLight intensity={0.1}/>
-      
       <pointLight castShadow intensity={0.8} position={[100, 100, 100]}/>
+      <directionalLight intesnity={0.1} castShadow shadow-mapSize-height={512} shadow-mapSize-width={512}/>
       <Physics 
         iterations={20}
         tolerance={0.0001}
         gravity={[0, -30, 0]}>
         <Ground receiveShadow position={[0, -0.01, 0]}/>
-        <Suspense fallback={null}>   
-          <IntroductionMap/> 
+        <Suspense fallback={null}>    
           <PocMap/>
           
-          <Cube mass={1} args={[1, 1, 1]} position={[4, 0.5, -1.5]} color='#f1f1f1'/>
         </Suspense>
-        <Skeleton position={[1, 0.25, 1]} scale={0.0005}/>
-        <Model />
+        <Skeleton castShadow position={[1, 0.25, 1]} scale={0.0005}/>
+        
         <Player position={[0, 2, 0]}/>
         { /*
+        <Model />
           <Suspense fallback={null}>
             <Map position={[-50, 0.1, 0]} scale={3}/> 
             <Map2 position={[0, 0.1, 0]} scale={3}/>
