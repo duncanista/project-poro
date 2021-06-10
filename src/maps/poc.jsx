@@ -12,7 +12,7 @@ export const PocMap = (props) => {
   //console.log(elements);
 
   return  <Suspense dispose={null}>
-    <group  position={[0, 0, 0]} {...props}>
+    <group  position={[10, 0, 10]} {...props}>
       { 
         [].map(node => {
           const name = node[0]

@@ -17,7 +17,7 @@ import closeSrc from '../assets/images/close.png';
 import { useEffect, useRef } from 'react';
 import '../assets/css/styles.css';
 
-import { useGame } from '../providers/game_provider';
+import { useGameStore } from '../store';
 
 const Sword = (props) => {
   const gltf = useGLTF(SWORDGLTF);
@@ -41,7 +41,7 @@ const Sword = (props) => {
 }
 
 export const Start = () => {
-  const { setNewGame } = useGame();
+  const { setNewGame } = useGameStore(state => ({ setNewGame: state.setNewGame }));
   const tutorial = useRef();
   const credits = useRef();
 
@@ -71,9 +71,9 @@ export const Start = () => {
   });
   return (<>
 
-    <h1 className="overlay" onClick={startNewGame} style={{position: 'absolute', top:'70%', left: '82%', zIndex: 100,  fontFamily:'dungeon'}} >Start Game</h1>
-    <h1 className="overlay" onClick={displayCredits} style={{position: 'absolute', top:'77%', left: '82%', zIndex: 100,  fontFamily:'dungeon'}} >Credits</h1>
-    <h1  className="overlay" onClick={displayTutorial}  style={{position: 'absolute', top:'84%', left: '82%', zIndex: 100,  fontFamily:'dungeon'}} >Tutorial</h1>
+    <h1 className="overlay" onClick={startNewGame} style={{ backgroundColor: 'transparent', position: 'absolute', top:'70%', left: '82%', zIndex: 100,  fontFamily:'dungeon'}} >Start Game</h1>
+    <h1 className="overlay" onClick={displayCredits} style={{backgroundColor: 'transparent', position: 'absolute', top:'77%', left: '82%', zIndex: 100,  fontFamily:'dungeon'}} >Credits</h1>
+    <h1  className="overlay" onClick={displayTutorial}  style={{backgroundColor: 'transparent', position: 'absolute', top:'84%', left: '82%', zIndex: 100,  fontFamily:'dungeon'}} >Tutorial</h1>
     <h1  style={{position: 'absolute', top:'5%', left: '5%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'128px'}} >ProjecT PorO</h1>
 
     <div ref={tutorial} className="cui" style={{position: 'absolute', zIndex: 100, top:'5%'}} >
