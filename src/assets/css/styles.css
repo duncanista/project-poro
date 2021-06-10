@@ -92,6 +92,9 @@
     border-radius: 5px;
     position: relative;
   }
+  .crosshair{
+    
+  }
   .bar {
     background: #c54;
     width: 100%;

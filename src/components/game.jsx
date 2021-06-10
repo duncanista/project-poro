@@ -33,12 +33,12 @@ export const Game = () => {
         gravity={[0, -30, 0]}>
         <Ground receiveShadow position={[0, -0.01, 0]}/>
         <Suspense fallback={null}>    
-          <PocMap/>
+          <PocMap position={[-0.4,0,0]}/>
           
         </Suspense>
-        <Skeleton castShadow position={[1, 0.25, 1]} scale={0.0005}/>
+        <Skeleton castShadow position={[5, 0.25, 1]} scale={0.0005}/>
         
-        <Player position={[0, 12, 0]}/>
+        <Player position={[0, 1, 0]}/>
         { /*
         <Model />
           <Suspense fallback={null}>

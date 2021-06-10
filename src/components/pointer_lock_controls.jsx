@@ -71,7 +71,7 @@ export const PointerLockControls = (props) => {
     if (hitting) {
       let radians = (b-timeAux) * (Math.PI/180);
       sword.position.z -= 0.045*Math.cos(radians/1.7);
-
+      sword.position.x -=0.001;
       setTimeout(() => {
         setHitting(false);
         sword.position.set(0.15, 0, -0.25);

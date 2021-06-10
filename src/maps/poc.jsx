@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useBox } from '@react-three/cannon'
 
-import map from '../components/map.glb';
+import map from './map.glb';
 
 export const PocMap = (props) => {
   const gltf = useGLTF(map);

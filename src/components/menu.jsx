@@ -47,7 +47,7 @@ export const Menu = () => {
             <div className="hit"></div>
         </div>
     </div>
-      <img src={swordSrc} alt={'sword'} style={{position: 'absolute', top:'2%', left: '5%', zIndex: 100, width:'3%', opacity:'0.85'}} />
+      <img src={swordSrc} alt={'sword'} className="crosshair" style={{position: 'absolute', top:'2%', left: '5%', zIndex: 100, width:'3%', opacity:'0.85'}} />
       <img src={crosshairSrc} alt={'sword'} style={{position: 'absolute', top:'50%', left: '50%', zIndex: 100, width:'2%', opacity:'0.85'}} />
       <img src={chestSrc} alt={'chest'} style={{position: 'absolute', top:'12%', left: '5%', zIndex: 100, width:'3%',  opacity:'0.85'}} />
       <img src={potionSrc} alt={'potion'} style={{position: 'absolute', top:'22%', left: '5%', zIndex: 100, width:'3%',  opacity:'0.85'}} />
