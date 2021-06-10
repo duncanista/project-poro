@@ -11,7 +11,7 @@ const userStore = (set) => ({
 });
 
 const gameStore = (set, get) => ({
-  newGame: false,
+  newGame: true,
   setNewGame: () => set((state) => ({ newGame: !state.newGame })),
   refs: {
     pauseScreen: null,

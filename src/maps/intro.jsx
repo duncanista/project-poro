@@ -27,7 +27,7 @@ export const IntroductionMap = (props) => {
     args: [0.1, 1.3, 3], 
   }));
 
-  console.log("All objects", obj);
+  // console.log("All objects", obj);
   const Ground = (props) => {
     const groundGroup = gltf.nodes.Ground_Large;
     const tiles = groundGroup.children;
