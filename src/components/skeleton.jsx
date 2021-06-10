@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useEffect } from 'react';
+import React, { Suspense, useRef, useEffect, useState } from 'react';
 import { Vector3 } from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useFBX, useGLTF, useAnimations } from '@react-three/drei';
@@ -25,7 +25,8 @@ export const Skeleton = (props) => {
   const { actions } = useAnimations(animations, group)
   const { position } = props;
 
-  const { reduceHealth, userApi } = useUserStore((state) => ({ reduceHealth: state.reduceHealth, userApi: state.api }));
+  const { reduceUserHealth, userApi } = useUserStore((state) => ({ reduceUserHealth: state.reduceHealth, userApi: state.api }));
+  const [health, setHealth] = useState(50);
 
   const [ref, api] = useBox(() => ({
     type: "Kinematic", 
@@ -33,12 +34,12 @@ export const Skeleton = (props) => {
     position,
     args: [0.18, 0.36, 0.18], 
     onCollide: (e) => {
-      reduceHealth(5);
+      reduceUserHealth(5);
     },
     
   }));
   
-  const { camera } = useThree(); 
+  const { camera, scene } = useThree(); 
 
   const playerIsNear = () => {
     const position = ref.current.position;
@@ -62,7 +63,7 @@ export const Skeleton = (props) => {
         let x = camera.position.x - ref.current.position.x;
         let z = camera.position.z - ref.current.position.z;
         
-        api.velocity.set(x*0.3, 0, z*0.3);
+        api.velocity.set(x*0.5, 0, z*0.5);
       }
       else{
         api.velocity.set(0, 0, 0);
@@ -70,31 +71,34 @@ export const Skeleton = (props) => {
     }, 1000)
   }, [])
 
-  useFrame(({clock}) => {
-    
-
+  useFrame(() => {
     ref.current.rotation.y = Math.atan2( ( camera.position.x - ref.current.position.x ), ( camera.position.z - ref.current.position.z ) );
+    if (health < 0) {
+      api.velocity.set(10, 0, 10);
+      setHealth(50);
+    }
   });
 
   return (
     <Suspense dispose={null}>
-      <mesh ref={ref} position={position} dispose={null} onClick={(e) => {
-        // TODO apply velocity to negative direction
-        let x = -camera.position.x + ref.current.position.x;
-        let z = -camera.position.z + ref.current.position.z;
-        api.velocity.set(x*10, 0, z*10)
-      }}>
-        <group ref={group} scale={props.scale} dispose={null} >
-          <primitive object={fbx}/>
-          <skinnedMesh 
-            {...skeletonSkinnedMesh}/>
-        </group>
-        <mesh>
-          <boxBufferGeometry args={[0.18, 0.36, 0.18]} transparent opacity={0} />
-          <meshNormalMaterial attach='material' transparent opacity={0}/>
-
+      
+        <mesh ref={ref} position={position} dispose={null} onClick={(e) => {
+          let x = -camera.position.x + ref.current.position.x;
+          let z = -camera.position.z + ref.current.position.z;
+          api.velocity.set(x*5, 0, z*5)
+          setHealth(health - 10);
+        }}>
+          <group ref={group} scale={props.scale} dispose={null} >
+            <primitive object={fbx}/>
+            <skinnedMesh 
+              {...skeletonSkinnedMesh}/>
+          </group>
+          <mesh>
+            <boxBufferGeometry args={[0.18, 0.36, 0.18]} transparent opacity={0} />
+            <meshNormalMaterial attach='material' transparent opacity={0}/>
+  
+          </mesh>
         </mesh>
-      </mesh>
       
     </Suspense>
   )
