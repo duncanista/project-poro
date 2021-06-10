@@ -9,7 +9,7 @@ import SWORD from '../assets/Sword.glb';
 import { useGame } from '../providers/game_provider';
 
 extend({ PointerLockControlsImpl });
-
+let timeAux = 0; 
 export const PointerLockControls = (props) => {
   const gltf = useGLTF(SWORD);
   const sword = gltf.nodes.Sword;
@@ -58,6 +58,8 @@ export const PointerLockControls = (props) => {
       if(locked) {
         console.log('estoy pegando con la espada');
           setHitting(true);
+          timeAux = Date.now();
+          sword.rotation.set(0, Math.PI/2.1, (Math.PI/2.1)+0.5);
       }
     });
     
@@ -65,13 +67,17 @@ export const PointerLockControls = (props) => {
 
   useFrame(({clock}) => {
     const time = Date.now() * 0.0005
+    const b = Date.now();
     if (hitting) {
-      sword.rotation.z -= 0.05
-      sword.position.z -= 0.005
-      sword.rotation.set(0, Math.PI/2.1, Math.PI/2.1)
+      console.log(b-timeAux);
+      let radians = (b-timeAux) * (Math.PI/180);
+      console.log(radians);
+      sword.position.z -= 0.045*Math.cos(radians/1.7);
+
       setTimeout(() => {
         setHitting(false);
         sword.position.set(0.15, 0, -0.25);
+
       }, 500);
     } else {
       sword.rotation.set(Math.PI/2.5, Math.PI/2.1, Math.PI/2.1)
