@@ -2,42 +2,22 @@ import React, {Suspense} from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Physics } from "@react-three/cannon";
 import { Cloud } from "./cloud";
-import SWORDGLTF from '../assets/Sword.glb';
-import { useGLTF, Stars } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+import {  Stars } from '@react-three/drei';
 
 
 import aSrc from '../assets/images/a.png';
 import sSrc from '../assets/images/s.png';
 import dSrc from '../assets/images/d.png';
 import wSrc from '../assets/images/w.png';
-import potionSrc from '../assets/images/potion-2.png';
 import closeSrc from '../assets/images/close.png';
 import theme from '../assets/sounds/start.mp3';
-
+import {Sword} from './sword'
 import { useEffect, useRef } from 'react';
 import '../assets/css/styles.css';
 
 import { useGameStore } from '../store';
 
-const Sword = (props) => {
-  const gltf = useGLTF(SWORDGLTF);
-  const a = useRef()
-  
-  useEffect(()=> {
-    gltf.scene.castShadow = true;
-  })
-  useFrame(({clock}) => {
-     a.current.position.y += Math.cos(clock.getElapsedTime()) * 0.0005;  
-  })
-  return <Suspense fallback={<Cloud />}>
-    <mesh castShadow ref={a} position={[-0.3,-2.68,6.6]} rotation={[0, 0, Math.PI/2]} >  
-      <group>
-        <primitive object={gltf.scene}    />
-      </group>
-    </mesh> 
-  </Suspense>
-}
+
 
 export const Start = () => {
   const { setNewGame } = useGameStore(state => ({ setNewGame: state.setNewGame }));
@@ -119,7 +99,7 @@ export const Start = () => {
       <ambientLight intensity={0.1} />
       <pointLight  intensity={0.7} position={[0, 2, 5]} />
       <Suspense fallback={null}>
-        <Sword />
+        <Sword dispose={null} />
       </Suspense> 
     </Canvas>
   </>);

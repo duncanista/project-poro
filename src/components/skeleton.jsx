@@ -42,18 +42,20 @@ export const Skeleton = (props) => {
   const { camera, scene } = useThree(); 
 
   const playerIsNear = () => {
-    const position = ref.current.position;
-    const playerPosition = camera.position;
-    const d = Math.pow(Math.pow(playerPosition.x - position.x, 2) + Math.pow(playerPosition.z - position.z, 2), 1/2);
+    if(ref && ref.current){
+      const position = ref.current.position;
+      const playerPosition = camera.position;
+      const d = Math.pow(Math.pow(playerPosition.x - position.x, 2) + Math.pow(playerPosition.z - position.z, 2), 1/2);
 
-    if (d <= SKELETON_FOV) {
-      actions[IDLE].stop();
-      actions[ATTACK].play();
-      return true;
-    } 
-    actions[ATTACK].stop();
-    actions[IDLE].play();
-    return false;
+      if (d <= SKELETON_FOV) {
+        actions[IDLE].stop();
+        actions[ATTACK].play();
+        return true;
+      } 
+      actions[ATTACK].stop();
+      actions[IDLE].play();
+      return false;
+    }
   }
 
   useEffect(() => {

@@ -8,9 +8,11 @@ import crosshairSrc from '../assets/images/crosshair.png';
 import { useGameStore, useUserStore } from '../store';
 
 export const Menu = () => {
+
   const pause = useRef();
   const resume = useRef();
   const pauseScreen = useRef();
+  
 
   const { health, potions, loot } = useUserStore(state => ({ health: state.health, loot: state.loot, potions: state.potions }));
   const { controls, actions } = useGameStore(state => ({ controls: state.refs.controls, actions: state.actions }));
@@ -38,7 +40,7 @@ export const Menu = () => {
     <div ref={pauseScreen} className="overlay" style={{position: 'absolute', top: '0%', zIndex: 100}}  >
       <div className="overlay-content">
           <a ref={resume} onClick={actions.resumeGame} href='#' style={{fontFamily:'dungeon'}}>Resume</a>
-          <a id='quitButton' href='#' style={{fontFamily:'dungeon'}} >Quit</a>
+          <a id='quitButton' onClick={actions.quitGame} href='#' style={{fontFamily:'dungeon'}} >Quit</a>
       </div>
     </div>
 

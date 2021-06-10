@@ -25,7 +25,8 @@ const gameStore = (set, get) => ({
       }
       refs.pauseScreen.hidden = true;
       refs.controls.lock();
-    }
+    },
+    quitGame: () => set((state) => ({ newGame: false }))
   }
 });
 
