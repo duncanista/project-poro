@@ -14,7 +14,7 @@ import { Model } from '../maps/Model.js';
 import { PocMap } from '../maps/poc';
 import { Menu } from './menu'
 import { Skeleton } from './skeleton';
-
+import { Chest } from './chest.js'
 import { useUserStore } from '../store';
 import Map from './Map'
 
