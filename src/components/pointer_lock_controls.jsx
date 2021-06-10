@@ -63,17 +63,20 @@ export const PointerLockControls = (props) => {
     
   }, [locked])
 
-  useFrame(() => {
+  useFrame(({clock}) => {
     const time = Date.now() * 0.0005
     if (hitting) {
       sword.rotation.z -= 0.05
       sword.position.z -= 0.005
+      sword.rotation.set(0, Math.PI/2.1, Math.PI/2.1)
       setTimeout(() => {
         setHitting(false);
-        sword.rotation.set(Math.PI/2.5, Math.PI/2.1, Math.PI/2.1)
         sword.position.set(0.15, 0, -0.25);
       }, 500);
     } else {
+      sword.rotation.set(Math.PI/2.5, Math.PI/2.1, Math.PI/2.1)
+      sword.position.x = 0.15;
+
       sword.position.y = Math.sin(time * 4 + camera.position.x + camera.position.z)*0.01
     }
   })
