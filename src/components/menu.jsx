@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import swordSrc from '../assets/images/sword-3.png';
 import chestSrc from '../assets/images/chest-3.png';
 import potionSrc from '../assets/images/potion-2.png';
+import crosshairSrc from '../assets/images/crosshair.png';
 
 import { useGameStore, useUserStore } from '../store';
 
@@ -47,6 +48,7 @@ export const Menu = () => {
         </div>
     </div>
       <img src={swordSrc} alt={'sword'} style={{position: 'absolute', top:'2%', left: '5%', zIndex: 100, width:'3%', opacity:'0.85'}} />
+      <img src={crosshairSrc} alt={'sword'} style={{position: 'absolute', top:'50%', left: '50%', zIndex: 100, width:'2%', opacity:'0.85'}} />
       <img src={chestSrc} alt={'chest'} style={{position: 'absolute', top:'12%', left: '5%', zIndex: 100, width:'3%',  opacity:'0.85'}} />
       <img src={potionSrc} alt={'potion'} style={{position: 'absolute', top:'22%', left: '5%', zIndex: 100, width:'3%',  opacity:'0.85'}} />
       <h1 style={{position: 'absolute', top:'12%', left: '10%', zIndex: 100, width:'3%', color:'white', fontFamily:'dungeon'}}>{loot}</h1>
