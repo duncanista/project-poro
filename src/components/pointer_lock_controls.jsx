@@ -18,6 +18,7 @@ export const PointerLockControls = (props) => {
   const controls = useRef();
 
   const [locked, setLocked] = useState(false);
+  const [hitting, setHitting] = useState(false);
 
 
   useEffect(() => {
@@ -56,6 +57,7 @@ export const PointerLockControls = (props) => {
     document.addEventListener('click', () => {
       if(locked) {
         console.log('estoy pegando con la espada');
+          setHitting(true);
       }
     });
     
@@ -63,7 +65,17 @@ export const PointerLockControls = (props) => {
 
   useFrame(() => {
     const time = Date.now() * 0.0005
-    sword.position.y = Math.sin(time * 4 + camera.position.x + camera.position.z)*0.01 
+    if (hitting) {
+      sword.rotation.z -= 0.05
+      sword.position.z -= 0.005
+      setTimeout(() => {
+        setHitting(false);
+        sword.rotation.set(Math.PI/2.5, Math.PI/2.1, Math.PI/2.1)
+        sword.position.set(0.15, 0, -0.25);
+      }, 500);
+    } else {
+      sword.position.y = Math.sin(time * 4 + camera.position.x + camera.position.z)*0.01
+    }
   })
 
   return <pointerLockControlsImpl 
