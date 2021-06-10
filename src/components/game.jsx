@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/cannon';
-import { Stars } from '@react-three/drei';
+import { Stars, Sky } from '@react-three/drei';
 
 import { Ground } from './ground';
 import { Player } from './player';
@@ -22,6 +22,7 @@ export const Game = () => {
   return <>
     <Menu / >
     <Canvas shadowMap sRGB gl={{alpha: false, antialias: false}}>
+      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
       <Camera fov={120}/>
       
       <ambientLight intensity={0.1}/>
@@ -31,7 +32,7 @@ export const Game = () => {
         iterations={20}
         tolerance={0.0001}
         gravity={[0, -30, 0]}>
-        <Ground receiveShadow position={[0, -0.01, 0]}/>
+        <Ground />
         <Suspense fallback={null}>    
           <PocMap/>
           
