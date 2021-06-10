@@ -10,7 +10,7 @@ const IDLE = 'metarig|0_Idle';
 const WALK = 'metarig|1_Walk';
 const ATTACK = 'metarig|3_Attack';
 const GET_HIT = 'metarig|4_GetHit';
-const SKELETON_FOV = 0.5;
+const SKELETON_FOV = 1.5;
 
 
 export const Skeleton = ({props, health, setHealth}) => {
@@ -26,7 +26,9 @@ export const Skeleton = ({props, health, setHealth}) => {
     type: "Kinematic", 
     position, 
     args: [0.18, 0.18, 0.18], 
-    onCollide: (e) => console.log('eee verga chocamos') 
+    onCollide: (e) => {
+      console.log('eee verga chocamos');
+    } 
   }));
   
   const { camera } = useThree(); 
@@ -37,51 +39,49 @@ export const Skeleton = ({props, health, setHealth}) => {
     const d = Math.pow(Math.pow(playerPosition.x - position.x, 2) + Math.pow(playerPosition.z - position.z, 2), 1/2);
 
     if (d <= SKELETON_FOV) {
+      actions[IDLE].stop();
+      actions[ATTACK].play();
       return true;
     } 
+    actions[ATTACK].stop();
+    actions[IDLE].play();
     return false;
   }
 
   useEffect(() => {
-    
-    actions[ATTACK].play()
+    actions[IDLE].play();
     setInterval(() => {
       if (playerIsNear()) {
-        console.log('estas muy cerca vaquero');
-        console.log(camera.position);
+        let x = camera.position.x - ref.current.position.x;
+        let z = camera.position.z - ref.current.position.z;
+        
+        api.velocity.set(x*0.3, 0, z*0.3);
+      }
+      else{
+        api.velocity.set(0, 0, 0);
       }
     }, 1000)
-    
-    
   }, [])
 
-  useFrame(() => {
-    const delta = Date.now() * 0.05
-    if (playerIsNear()) {
-      const player = camera.position;
-      const direction = new Vector3();
-      direction
-        .subVectors(player)
-        .normalize()
-        .multiplyScalar(1.5)
-        .applyEuler(camera.rotation);
+  useFrame(({clock}) => {
+    
 
-
-
-      ref.current.position.x += direction.x * delta
-      ref.current.position.z += direction.z * delta
-    }
+    ref.current.rotation.y = Math.atan2( ( camera.position.x - ref.current.position.x ), ( camera.position.z - ref.current.position.z ) );
   });
 
   return (
     <Suspense dispose={null}>
-      <mesh ref={ref} position={position} dispose={null}>
-        <group ref={group} scale={props.scale} dispose={null}>
+      <mesh ref={ref} position={position} dispose={null} >
+        <group ref={group} scale={props.scale} dispose={null} >
           <primitive object={fbx}/>
           <skinnedMesh 
             {...skeletonSkinnedMesh}/>
         </group>
-        <boxBufferGeometry args={[0.18, 0.18, 0.18]}/>
+        <mesh>
+          <boxBufferGeometry args={[0.18, 0.18, 0.18]} transparent opacity={0} />
+          <meshNormalMaterial attach='material' transparent opacity={0}/>
+
+        </mesh>
       </mesh>
       
     </Suspense>
