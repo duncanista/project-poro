@@ -9,6 +9,7 @@ import { Camera } from './camera';
 import { Cube } from './cube';
 
 import { IntroductionMap } from '../maps/intro';
+import { Model } from '../maps/Model.js';
 
 import { PocMap } from '../maps/poc';
 import { Menu } from './menu'
@@ -36,7 +37,7 @@ export const Game = () => {
           <Cube mass={1} args={[1, 1, 1]} position={[4, 0.5, -1.5]} color='#f1f1f1'/>
         </Suspense>
         <Skeleton position={[1, 0.25, 1]} scale={0.0005}/>
-
+        <Model />
         <Player position={[0, 2, 0]}/>
         { /*
           <Suspense fallback={null}>
