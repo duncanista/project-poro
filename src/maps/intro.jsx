@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import { useGLTF } from '@react-three/drei';
 
+import { useBox } from '@react-three/cannon';
+
 import { Prop } from '../components/prop'
 
 import allObjects from '../assets/Objects.glb';
@@ -10,6 +12,20 @@ export const IntroductionMap = (props) => {
   const gltf = useGLTF(map);
   const obj = useGLTF(allObjects);
   const nodes = obj.nodes;
+
+  const [ref, api] = useBox(() => ({
+    type: "Static", 
+    mass: 1,
+    position: [0, 0, 0.5],
+    args: [0.1, 1.3, 3], 
+  }));
+
+  const [ref2, api2] = useBox(() => ({
+    type: "Static", 
+    mass: 1,
+    position: [-2, 0, 0.5],
+    args: [0.1, 1.3, 3], 
+  }));
 
   console.log("All objects", obj);
   const Ground = (props) => {
@@ -29,28 +45,16 @@ export const IntroductionMap = (props) => {
   return <Suspense dispose={null}>
     <group {...props}>
       <primitive object={obj.scene} position={[-10, 0, 0]} />
-      <primitive object={gltf.scene} position={[-20, 0, 0]} />
-      <Prop props={{position: [-5, 0, 0], mass: 1}} nodes={nodes} name={'Armor_Stand'} physics />
-      <Prop 
-        props={{position: [-2, 0, 0], mass: 100, type: 'Static'}} 
-        nodes={nodes} 
-        name={'Stairs'} />
-      <Prop 
-        props={{position: [-3, 0.75, 0], mass: 100, type: 'Static'}} 
-        nodes={nodes} 
-        name={'Stairs'} physics />
-      <Prop 
-        props={{position: [-3, 0.75, -3], mass: 100, type: 'Static'}} 
-        nodes={nodes} 
-        name={'Stairs'} physics />
-      <Prop 
-        props={{position: [-2, 0.5, 0], rotation: [0, 0, -Math.PI/4], mass: 1, type: 'Static'}} 
-        nodes={nodes} 
-        name={'Ground_Tiles'} physics noMaterial />
-      <Prop 
-        props={{position: [0, 0.5, 0], rotation: [0, 0, -Math.PI/4], mass: 1, type: 'Static'}} 
-        nodes={nodes} 
-        name={'Ground_Tiles'} physics noMaterial />
+      <primitive object={gltf.scene} position={[0, 0, 0]} />
+      <mesh ref={ref} dispose={null}>
+        <boxBufferGeometry args={[0.1, 1.3, 3]} />
+        <meshNormalMaterial attach='material'/>
+      </mesh>
+
+      <mesh ref={ref2} dispose={null}>
+        <boxBufferGeometry args={[0.1, 1.3, 3]} />
+        <meshNormalMaterial attach='material'/>
+      </mesh>
     </group>
   </Suspense>
 }

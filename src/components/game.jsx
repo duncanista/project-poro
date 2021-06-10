@@ -31,8 +31,9 @@ export const Game = () => {
         gravity={[0, -30, 0]}>
         <Ground receiveShadow position={[0, -0.01, 0]}/>
         <Suspense fallback={null}>   
-          { /* <IntroductionMap/> 
-          <PocMap/> */}
+          <IntroductionMap/> 
+          <PocMap/>
+          
           <Cube mass={1} args={[1, 1, 1]} position={[4, 0.5, -1.5]} color='#f1f1f1'/>
         </Suspense>
         <Skeleton position={[1, 0.25, 1]} scale={0.0005}/>
