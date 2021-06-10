@@ -14,7 +14,7 @@ export const Menu = () => {
   const { health } = useGame();
   
   useEffect(() => {
-    pauseScreen.current.hidden = true;
+    
     if (pause && pause.current){
       pause.current.addEventListener('click', () => {
         console.log('aaaa clicaste la pausa wacho');
@@ -31,11 +31,12 @@ export const Menu = () => {
   return <>
 
     <div ref={pauseScreen} className="overlay" style={{position: 'absolute', left: '0%', zIndex: 100}}  >
-        <div className="overlay-content">
-            <a ref={resume} href='#' style={{fontFamily:'dungeon'}}>Resume</a>
-            <a id='quitButton' href='#' style={{fontFamily:'dungeon'}} >Quit</a>
-        </div>
+      <div className="overlay-content">
+          <a ref={resume} href='#' style={{fontFamily:'dungeon'}}>Resume</a>
+          <a id='quitButton' href='#' style={{fontFamily:'dungeon'}} >Quit</a>
+      </div>
     </div>
+    
     <div className="health-bar" data-total="100" data-value={health} style={{position: 'absolute', top:'2%', zIndex: 100}}>
         <div className="bar">
             <div className="hit"></div>

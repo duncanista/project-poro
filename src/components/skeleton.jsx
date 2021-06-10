@@ -1,4 +1,5 @@
 import React, { Suspense, useRef, useEffect } from 'react';
+import { Vector3 } from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useFBX, useGLTF, useAnimations } from '@react-three/drei';
 import { useBox } from '@react-three/cannon';
@@ -9,7 +10,7 @@ const IDLE = 'metarig|0_Idle';
 const WALK = 'metarig|1_Walk';
 const ATTACK = 'metarig|3_Attack';
 const GET_HIT = 'metarig|4_GetHit';
-const SKELETON_FOV = 0.33;
+const SKELETON_FOV = 0.5;
 
 
 export const Skeleton = ({props, health, setHealth}) => {
@@ -47,6 +48,7 @@ export const Skeleton = ({props, health, setHealth}) => {
     setInterval(() => {
       if (playerIsNear()) {
         console.log('estas muy cerca vaquero');
+        console.log(camera.position);
       }
     }, 1000)
     
@@ -54,7 +56,21 @@ export const Skeleton = ({props, health, setHealth}) => {
   }, [])
 
   useFrame(() => {
-    
+    const delta = Date.now() * 0.05
+    if (playerIsNear()) {
+      const player = camera.position;
+      const direction = new Vector3();
+      direction
+        .subVectors(player)
+        .normalize()
+        .multiplyScalar(1.5)
+        .applyEuler(camera.rotation);
+
+
+
+      ref.current.position.x += direction.x * delta
+      ref.current.position.z += direction.z * delta
+    }
   });
 
   return (
