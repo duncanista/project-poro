@@ -3,36 +3,46 @@ import { extend, useFrame, useThree } from '@react-three/fiber';
 
 import { useGLTF } from '@react-three/drei';
 import { PointerLockControls as PointerLockControlsImpl } from 'three/examples/jsm/controls/PointerLockControls';
+import { useGameStore } from '../store';
+
 import SWORD from '../assets/Sword.glb';
+import { useGame } from '../providers/game_provider';
+
 extend({ PointerLockControlsImpl });
-
-
-
 
 export const PointerLockControls = (props) => {
   const gltf = useGLTF(SWORD);
   const sword = gltf.nodes.Sword;
   const { camera, gl, scene } = useThree();
+  const { pauseScreen } = useGameStore(state => ({ pauseScreen: state.refs.pauseScreen }));
   const controls = useRef();
 
   const [locked, setLocked] = useState(false);
 
-  const lockButton = document.getElementById('lockButton');
 
   useEffect(() => {
-    if (controls && controls.current != null){
+    if (controls.current) {
+      useGameStore.setState((state) => ({
+        refs: {
+          ...state.refs,
+          controls: controls.current
+        }
+      }))
+      console.log('los controles se cargaron');
+    }
+  }, [controls]);
+
+  useEffect(() => {
+    if (controls && controls.current){
       controls.current.addEventListener('lock', () => {
         setLocked(true);
       });
 
       controls.current.addEventListener('unlock', () => {
         console.log('unlocked with esc');
+        pauseScreen.hidden = false;
         setLocked(false);
       });
-
-      lockButton.addEventListener('click', () => {
-        controls.current.lock();
-      })
 
     }
     sword.position.set(0.15, 0, -0.25);

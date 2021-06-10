@@ -13,7 +13,7 @@ const GET_HIT = 'metarig|4_GetHit';
 const SKELETON_FOV = 1.5;
 
 
-export const Skeleton = ({props, health, setHealth}) => {
+export const Skeleton = (props) => {
   const group = useRef()
   const fbx = useFBX(skelly)
   const children = fbx.children;

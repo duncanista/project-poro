@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/cannon';
 import { Stars } from '@react-three/drei';
@@ -14,13 +14,11 @@ import { PocMap } from '../maps/poc';
 import { Menu } from './menu'
 import { Skeleton } from './skeleton';
 
-import { useGame } from '../providers/game_provider';
+import { useUserStore } from '../store';
 
 export const Game = () => {
-  const { health, setHealth } = useGame();
   return <>
     <Menu / >
-    <button id='lockButton' style={{position: 'absolute', top: '55%', left: '5%', zIndex: 100}}>Lockear</button>
     <Canvas shadowMap sRGB gl={{alpha: false, antialias: false}}>
       <Camera fov={120}/>
       
@@ -37,7 +35,7 @@ export const Game = () => {
           <PocMap/> */}
           <Cube mass={1} args={[1, 1, 1]} position={[4, 0.5, -1.5]} color='#f1f1f1'/>
         </Suspense>
-        <Skeleton props={{position: [1, 0.25, 1], scale: 0.0005}} setHealth={setHealth} health={health}/>
+        <Skeleton position={[1, 0.25, 1]} scale={0.0005}/>
 
         <Player position={[0, 2, 0]}/>
         { /*
