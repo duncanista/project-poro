@@ -38,7 +38,7 @@ export const Game = () => {
         </Suspense>
         <Skeleton castShadow position={[1, 0.25, 1]} scale={0.0005}/>
         
-        <Player position={[0, 2, 0]}/>
+        <Player position={[0, 12, 0]}/>
         { /*
         <Model />
           <Suspense fallback={null}>
