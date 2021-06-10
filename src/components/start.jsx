@@ -13,6 +13,7 @@ import dSrc from '../assets/images/d.png';
 import wSrc from '../assets/images/w.png';
 import potionSrc from '../assets/images/potion-2.png';
 import closeSrc from '../assets/images/close.png';
+import theme from '../assets/sounds/start.mp3';
 
 import { useEffect, useRef } from 'react';
 import '../assets/css/styles.css';
@@ -44,6 +45,7 @@ export const Start = () => {
   const { setNewGame } = useGameStore(state => ({ setNewGame: state.setNewGame }));
   const tutorial = useRef();
   const credits = useRef();
+  const audio = new Audio(theme);
 
 
   const startNewGame = () => {
@@ -68,9 +70,10 @@ export const Start = () => {
   useEffect(() => {
     tutorial.current.hidden = true;
     credits.current.hidden = true;
+    audio.play();
   });
   return (<>
-
+    <audio src={theme}/>
     <h1 className="overlay" onClick={startNewGame} style={{ backgroundColor: 'transparent', position: 'absolute', top:'70%', left: '82%', zIndex: 100,  fontFamily:'dungeon'}} >Start Game</h1>
     <h1 className="overlay" onClick={displayCredits} style={{backgroundColor: 'transparent', position: 'absolute', top:'77%', left: '82%', zIndex: 100,  fontFamily:'dungeon'}} >Credits</h1>
     <h1  className="overlay" onClick={displayTutorial}  style={{backgroundColor: 'transparent', position: 'absolute', top:'84%', left: '82%', zIndex: 100,  fontFamily:'dungeon'}} >Tutorial</h1>
