@@ -4,6 +4,8 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { useFBX, useGLTF, useAnimations } from '@react-three/drei';
 import { useBox } from '@react-three/cannon';
 
+import { useUserStore } from '../store';
+
 import skelly from '../assets/characters/skeleton.fbx';
 
 const IDLE = 'metarig|0_Idle';
@@ -22,12 +24,15 @@ export const Skeleton = (props) => {
   const skeletonSkinnedMesh = children[0];
   const { actions } = useAnimations(animations, group)
   const { position } = props;
+
+  const { reduceHealth } = useUserStore((state) => ({ reduceHealth: state.reduceHealth }));
+
   const [ref, api] = useBox(() => ({
     type: "Kinematic", 
     position, 
     args: [0.18, 0.18, 0.18], 
     onCollide: (e) => {
-      console.log('eee verga chocamos');
+      reduceHealth(5);
     } 
   }));
   
