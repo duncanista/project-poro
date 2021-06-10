@@ -6,6 +6,7 @@ import { useSphere, useBox } from '@react-three/cannon';
 
 import { PointerLockControls } from './pointer_lock_controls';
 import { usePlayerControls } from '../hooks/usePlayerControls';
+import { useUserStore } from '../store';
 
 import SWORD from '../assets/Sword.glb';
 
@@ -40,7 +41,14 @@ export const Player = (props) => {
     api.velocity.subscribe(v => velocity.current = v)
   }, [api.velocity])
 
-
+  useEffect(() => {
+    if (api) {
+      useUserStore.setState((_) => ({
+        api: api
+      }))
+      console.log('ya cargamos el api del usuario');
+    }
+  }, [api])
 
   useFrame(() => {
 

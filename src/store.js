@@ -6,7 +6,8 @@ const userStore = (set) => ({
   loot: 0,
   increaseLoot: (value) => set((state) => ({ loot: state.loot + value })),
   potions: 0,
-  increasePotions: (value) => set((state) => ({ potions: state.potions + value }))
+  increasePotions: (value) => set((state) => ({ potions: state.potions + value })),
+  api: null
 });
 
 const gameStore = (set, get) => ({

@@ -25,15 +25,17 @@ export const Skeleton = (props) => {
   const { actions } = useAnimations(animations, group)
   const { position } = props;
 
-  const { reduceHealth } = useUserStore((state) => ({ reduceHealth: state.reduceHealth }));
+  const { reduceHealth, userApi } = useUserStore((state) => ({ reduceHealth: state.reduceHealth, userApi: state.api }));
 
   const [ref, api] = useBox(() => ({
     type: "Kinematic", 
-    position, 
-    args: [0.18, 0.18, 0.18], 
+    mass: 1,
+    position,
+    args: [0.18, 0.36, 0.18], 
     onCollide: (e) => {
       reduceHealth(5);
-    } 
+    },
+    
   }));
   
   const { camera } = useThree(); 
@@ -76,15 +78,17 @@ export const Skeleton = (props) => {
 
   return (
     <Suspense dispose={null}>
-      <mesh ref={ref} position={position} dispose={null} >
+      <mesh ref={ref} position={position} dispose={null} onClick={(e) => {
+        // TODO apply velocity to negative direction
+      }}>
         <group ref={group} scale={props.scale} dispose={null} >
           <primitive object={fbx}/>
           <skinnedMesh 
             {...skeletonSkinnedMesh}/>
         </group>
         <mesh>
-          <boxBufferGeometry args={[0.18, 0.18, 0.18]} transparent opacity={0} />
-          <meshNormalMaterial attach='material' transparent opacity={0}/>
+          <boxBufferGeometry args={[0.18, 0.36, 0.18]} transparent opacity={0} />
+          <meshNormalMaterial attach='material'  opacity={1}/>
 
         </mesh>
       </mesh>
