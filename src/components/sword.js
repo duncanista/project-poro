@@ -1,9 +1,16 @@
-import React, { useRef, Suspense } from 'react'
+import React, { useRef, Suspense, useEffect} from 'react'
 import { useGLTF } from '@react-three/drei'
+import { extend, useFrame, useThree } from '@react-three/fiber';
 
 export const Sword = (props) => {
   const group = useRef()
   const { nodes, materials } = useGLTF('/Sword.glb')
+
+  useFrame(({ clock }) => {
+    group.current.position.y += 0.001*Math.cos(clock.getElapsedTime());
+  })
+  
+
   return (
     <Suspense  fallback={null}>
       <group ref={group} {...props} dispose={null}>

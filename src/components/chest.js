@@ -9,7 +9,7 @@ export const Chest = (props) => {
   const { actions } = useAnimations(animations, group)
 
   const [ref, api] = useBox(() => ({
-    type: "Kinematic", 
+    type: "Static", 
     mass: 1,
     args: [1, 1, 1],
     
