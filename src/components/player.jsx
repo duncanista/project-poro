@@ -38,6 +38,10 @@ export const Player = (props) => {
   const velocity = useRef([0, 0, 0]);
 
   useEffect(() => {
+    camera.rotation.y = Math.PI/2;
+  }, [])
+
+  useEffect(() => {
     api.velocity.subscribe(v => velocity.current = v)
   }, [api.velocity])
 

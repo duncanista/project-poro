@@ -7,7 +7,7 @@ export const Cube = (props) => {
   return (
     <mesh ref={ref} receiveShadow castShadow >
       <boxBufferGeometry args={args} />
-      <meshNormalMaterial attach='material' />
+      <meshNormalMaterial attach='material' transparent opacity={0} />
     </mesh>
   )
 }
