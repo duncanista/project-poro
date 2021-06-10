@@ -79,7 +79,6 @@ export const Skeleton = (props) => {
   return (
     <Suspense dispose={null}>
       <mesh ref={ref} position={position} dispose={null} onClick={(e) => {
-        // TODO apply velocity to negative direction
         let x = -camera.position.x + ref.current.position.x;
         let z = -camera.position.z + ref.current.position.z;
         api.velocity.set(x*10, 0, z*10)
