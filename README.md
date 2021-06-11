@@ -21,7 +21,7 @@ Technique: Low-poly
 - [ ] User will have HP, if HP = 0, GAME OVER
 - [ ] The environment shall be affected by the user's actions
 ### Setup
-- [ ] Probably React, still a TBD
+- [ ] React Three Fiber
 - [ ] ThreeJS (or React Three Fiber)
 - [ ] Asset hunting
 
