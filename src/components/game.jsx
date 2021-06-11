@@ -38,19 +38,14 @@ export const Game = () => {
           <Chest position={[10.5, 0, 9.5]} r={[0,Math.PI,0]} />
           <Chest position={[3.5, 0, 5.5]} r={[0,-Math.PI/2,0]}/>
           <Chest position={[4.5, 0, 10.5]} r={[0,Math.PI,0]}/>
-          <Chest position={[10.5, 3, 5.5]} r={[0,Math.PI,0]}/>
+          <Chest position={[10.5, 0, 2.5]} r={[0,-Math.PI/2,0]}/>
+          <Chest position={[6.5, 0, 3.5]} r={[0,0,0]}/>
+          <Chest position={[5.5, 0, -3.5]} r={[0,0,0]}/>
         </Suspense>
         <Skeleton castShadow position={[8.5, 0.25, -2]} scale={0.0005}/>
         
         <Player position={[10.5, 0, 8.5]}/>
-        { /*
-        <Model />
-          <Suspense fallback={null}>
-            <Map position={[-50, 0.1, 0]} scale={3}/> 
-            <Map2 position={[0, 0.1, 0]} scale={3}/>
-          </Suspense>
-        
-        */}
+
       </Physics>
     </Canvas>
   </>

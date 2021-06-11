@@ -87,7 +87,7 @@ export const Skeleton = (props) => {
         <mesh ref={ref} position={position} dispose={null} onClick={(e) => {
           let x = -camera.position.x + ref.current.position.x;
           let z = -camera.position.z + ref.current.position.z;
-          api.velocity.set(x*5, 0, z*5)
+          api.velocity.set(x*2.5, 0, z*2.5)
           setHealth(health - 10);
         }}>
           <group ref={group} scale={props.scale} dispose={null} >
