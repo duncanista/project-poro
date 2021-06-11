@@ -67,6 +67,7 @@ export const Start = () => {
       <img src={dSrc} style={{position: 'absolute', top:'35.2%', left: '17%',width:'6%', zIndex: 100, }} />
       <img src={wSrc} style={{position: 'absolute', top:'23%', left: '10%',width:'6%', zIndex: 100}} />
       <h4  style={{position: 'absolute', left: '3%', top: '45%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'32px'}} >Move</h4>
+      <h4  style={{position: 'absolute', left: '3%', top: '60%', zIndex: 1,  fontFamily:'dungeon',color:'white', fontSize:'32px'}} >To retrieve loot and hit enemies: LEFT CLICK</h4>
     </div>
 
     <div ref={credits} className="credits" style={{position: 'absolute', zIndex: 100, top:'5%'}} >
