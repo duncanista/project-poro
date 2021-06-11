@@ -21,9 +21,10 @@ Technique: Low-poly
 - [ ] User will have HP, if HP = 0, GAME OVER
 - [ ] The environment shall be affected by the user's actions
 ### Setup
-- [ ] Probably React, still a TBD
-- [ ] ThreeJS (or React Three Fiber)
+- [ ] Three JS
+- [ ] React Three Fiber
 - [ ] Asset hunting
+- [ ] Yarn needed to run project
 
 ### Others
 - [ ] Load 3D models properly
