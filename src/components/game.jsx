@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { Physics } from '@react-three/cannon';
-import { Stars, Sky } from '@react-three/drei';
+import { Stars } from '@react-three/drei';
 
 import { Ground } from './ground';
 import { Player } from './player';
@@ -15,10 +15,17 @@ import { PocMap } from '../maps/poc';
 import { Menu } from './menu'
 import { Skeleton } from './skeleton';
 import { Chest } from './chest'
-import { useUserStore } from '../store';
+import { useGameStore, useUserStore } from '../store';
 import Map from './Map'
 
 export const Game = () => {
+  const { health } = useUserStore(state => ({ health: state.health }));
+  const { actions } = useGameStore(state => ({ actions: state.actions }))
+  useEffect(() => {
+    if (health <= 0) {
+      actions.quitGame()
+    }
+  }, [health])
   return <>
     <Menu / >
     <Canvas shadowMap sRGB gl={{alpha: false, antialias: false}}>
