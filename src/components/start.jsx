@@ -27,7 +27,7 @@ export const Start = () => {
 
   const startNewGame = () => {
     setNewGame(true);
-    audio.stop()
+    audio.pause()
   }  
   const displayTutorial  = () => {
     tutorial.current.hidden = false;
