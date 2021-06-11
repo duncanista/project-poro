@@ -27,6 +27,7 @@ export const Start = () => {
 
   const startNewGame = () => {
     setNewGame(true);
+    audio.stop()
   }  
   const displayTutorial  = () => {
     tutorial.current.hidden = false;
@@ -98,7 +99,9 @@ export const Start = () => {
       <ambientLight intensity={0.1} />
       <pointLight  intensity={0.7} position={[0, 2, 5]} />
       <Suspense  fallback={null}>
-        <Sword position={[-0.3,-2.6,6.6]} rotation={[0,0,Math.PI/2]} />
+        <Sword position={[-0.3,-2.6,6.6]} rotation={[0,0,Math.PI/2]} onClick={() => {
+          audio.play();
+        }}/>
       </Suspense> 
     </Canvas>
   </>);
