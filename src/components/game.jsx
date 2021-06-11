@@ -14,7 +14,7 @@ import { Model } from '../maps/Model.js';
 import { PocMap } from '../maps/poc';
 import { Menu } from './menu'
 import { Skeleton } from './skeleton';
-import { Chest } from './chest.js'
+import { Chest } from './chest'
 import { useUserStore } from '../store';
 import Map from './Map'
 
@@ -35,12 +35,12 @@ export const Game = () => {
         <Ground />
         <Suspense fallback={null}>    
           <PocMap/>
-          <Chest position={[5,0,5]} r={[0,0,0]} />
-          <Chest position={[5,0,6]} r={[0,0,0]}/>
-          <Chest position={[6.4,0,5]} r={[0,Math.PI,0]}/>
-          <Chest position={[6.4,0,6]} r={[0,Math.PI,0]}/>
+          <Chest position={[10.5, 0, 9.5]} r={[0,Math.PI,0]} />
+          <Chest position={[3.5, 0, 5.5]} r={[0,-Math.PI/2,0]}/>
+          <Chest position={[4.5, 0, 10.5]} r={[0,Math.PI,0]}/>
+          <Chest position={[10.5, 3, 5.5]} r={[0,Math.PI,0]}/>
         </Suspense>
-        <Skeleton castShadow position={[5, 0.25, 1]} scale={0.0005}/>
+        <Skeleton castShadow position={[8.5, 0.25, -2]} scale={0.0005}/>
         
         <Player position={[10.5, 0, 8.5]}/>
         { /*

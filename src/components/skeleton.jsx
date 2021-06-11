@@ -34,7 +34,7 @@ export const Skeleton = (props) => {
     position,
     args: [0.18, 0.36, 0.18], 
     onCollide: (e) => {
-      reduceUserHealth(5);
+      reduceUserHealth(20);
     },
     
   }));

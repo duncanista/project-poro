@@ -7,9 +7,6 @@ export const PocMap = (props) => {
   const gltf = useGLTF(map);
   console.log('poc map', gltf);
 
-  const elements = gltf.scene.children[0].children;
-  console.log(elements);
-
   const normalizePosition = (a,  b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
 
 
