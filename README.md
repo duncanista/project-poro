@@ -24,6 +24,7 @@ Technique: Low-poly
 - [ ] Three JS
 - [ ] React Three Fiber
 - [ ] Asset hunting
+- [ ] Yarn needed to run project
 
 ### Others
 - [ ] Load 3D models properly
